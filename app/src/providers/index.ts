@@ -1,11 +1,12 @@
-import BaseProvider from "./base";
-import IndexDBProvider from "./indexDB";
-import LocalStorageProvider from "./localstorage";
+import BaseProvider from "@/providers/base";
+import IndexDBProvider from "@/providers/indexDB";
+import LocalStorageProvider from "@/providers/localstorage";
 
-const DEFAULT_PROVIDER = new LocalStorageProvider();
 const ACTIVE_PROVIDERS: Record<string, BaseProvider> = {}
 
-export default function createProvider(provider: 'local' | 'api' | 'indexDB' = 'indexDB') {
+export type ProviderType = 'local' | 'api' | 'indexDB';
+
+export default function createProvider(provider: ProviderType = 'indexDB') {
     if (ACTIVE_PROVIDERS[provider]) {
         return ACTIVE_PROVIDERS[provider];
     }
@@ -19,8 +20,8 @@ export default function createProvider(provider: 'local' | 'api' | 'indexDB' = '
             return ACTIVE_PROVIDERS.indexDB;
         case 'api':
             console.log('API Provider not implemented yet');
-            return DEFAULT_PROVIDER;
+            return ACTIVE_PROVIDERS.local;
         default:
-            return DEFAULT_PROVIDER;
+            return ACTIVE_PROVIDERS.local;
     }
 }

@@ -1,20 +1,23 @@
 import BaseProvider from "../base";
 import { v4 as uuidv4 } from 'uuid';
-
-const STORE = globalThis.localStorage;
+import storage from '@/providers/localstorage/storage';
 
 export const STORE_ROOT = 'APP_ROOT';
 
 const createNoDataError = () => new Error('No Data Found');
 
-export default class LocalStorageProvider extends BaseProvider {
-    store = STORE;
+function handlePath(path: string) {
+    return path.split('/').filter(item => item !== '');
+}
 
-    constructor(store = STORE) {
+export default class LocalStorageProvider extends BaseProvider {
+    store = storage;
+
+    constructor() {
         super();
-        this.store = store;
+
     }
-    
+
     private _getRoot() {
         const item = this.store.getItem(STORE_ROOT);
         if (!item) {
@@ -27,7 +30,7 @@ export default class LocalStorageProvider extends BaseProvider {
     async get<T>(path: string): Promise<T> {
         return new Promise((resolve, reject) => {
             const root = this._getRoot();
-            const keys = path.split('/');
+            const keys = handlePath(path);
 
             let current = root;
             for (const key of keys) {
@@ -53,10 +56,10 @@ export default class LocalStorageProvider extends BaseProvider {
         });
     }
 
-    async create<T>(path: string, data: T): Promise<T & {id: string}> {
+    async create<T>(path: string, data: T): Promise<T & { id: string }> {
         return new Promise((resolve, reject) => {
             const root = this._getRoot();
-            const keys = path.split('/');
+            const keys = handlePath(path);
 
             try {
                 let current = root;
@@ -71,7 +74,7 @@ export default class LocalStorageProvider extends BaseProvider {
                 if (!current[keys[keys.length - 1]]) {
                     current[keys[keys.length - 1]] = {};
                 }
-                const newData = {...data, id};
+                const newData = { ...data, id };
                 (current[keys[keys.length - 1]] as Record<string, unknown>)[id] = newData;
                 this.store.setItem(STORE_ROOT, JSON.stringify(root));
                 resolve(newData);
@@ -85,18 +88,25 @@ export default class LocalStorageProvider extends BaseProvider {
     async update<T>(path: string, data: Partial<T>): Promise<T> {
         return new Promise((resolve, reject) => {
             const root = this._getRoot();
-            const keys = path.split('/');
+            const keys = handlePath(path);
 
             try {
                 let current = root;
                 for (let i = 0; i < keys.length - 1; i++) {
-                    current = current[keys[i]] as Record<string, unknown>;
+                    const item = current[keys[i]] as Record<string, unknown>;
+                    if (!item) {
+                        reject(createNoDataError());
+                        return;
+                    }
+                    current = item;
                 }
 
                 if (!current[keys[keys.length - 1]]) {
-                    current[keys[keys.length - 1]] = {};
+                    reject(createNoDataError());
+                    return;
                 }
-                const newData = JSON.parse(JSON.stringify({...current[keys[keys.length - 1]], ...data}));
+
+                const newData = JSON.parse(JSON.stringify({ ...current[keys[keys.length - 1]], ...data }));
                 current[keys[keys.length - 1]] = newData;
                 this.store.setItem(STORE_ROOT, JSON.stringify(root));
                 resolve(current[keys[keys.length - 1]] as T);
@@ -110,14 +120,14 @@ export default class LocalStorageProvider extends BaseProvider {
     async delete(path: string): Promise<void> {
         return new Promise((resolve, reject) => {
             const root = this._getRoot();
-            const keys = path.split('/');
+            const keys = handlePath(path);
 
             try {
                 let current = root;
                 for (let i = 0; i < keys.length - 1; i++) {
                     current = current[keys[i]] as Record<string, unknown>;
                 }
-        
+
                 delete current[keys[keys.length - 1]];
                 this.store.setItem(STORE_ROOT, JSON.stringify(root));
                 resolve(void 0);

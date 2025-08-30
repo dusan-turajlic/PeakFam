@@ -1,6 +1,6 @@
-import BaseProvider from "../base";
+import BaseProvider from "@/providers/base";
 import { v4 as uuidv4 } from 'uuid';
-import IndexDB from './indexDB';
+import IndexDB from '@/providers/indexDB/db';
 
 const DB_NAME = 'APP_DB';
 const DB_VERSION = 1;
@@ -36,7 +36,7 @@ export default class IndexDBProvider extends BaseProvider {
 
             request.onupgradeneeded = (event) => {
                 const db = (event.target as IDBOpenDBRequest).result;
-                
+
                 // Create object store if it doesn't exist
                 if (!db.objectStoreNames.contains(DB_STORE_NAME)) {
                     const store = db.createObjectStore(DB_STORE_NAME, { keyPath: 'path' });
@@ -50,23 +50,23 @@ export default class IndexDBProvider extends BaseProvider {
 
     private async wrap<T>(request: IDBRequest<T>): Promise<T> {
         return new Promise<T>((resolve, reject) => {
-          const onSuccess = (ev: Event) => {
-            cleanup();
-            resolve((ev.target as IDBRequest<T>).result);
-          };
-          const onError = (ev: Event) => {
-            cleanup();
-            reject((ev.target as IDBRequest<T>).error ?? new DOMException("IDB request failed"));
-          };
-          const cleanup = () => {
-            request.removeEventListener("success", onSuccess);
-            request.removeEventListener("error", onError);
-          };
-      
-          request.addEventListener("success", onSuccess);
-          request.addEventListener("error", onError);
+            const onSuccess = (ev: Event) => {
+                cleanup();
+                resolve((ev.target as IDBRequest<T>).result);
+            };
+            const onError = (ev: Event) => {
+                cleanup();
+                reject((ev.target as IDBRequest<T>).error ?? new DOMException("IDB request failed"));
+            };
+            const cleanup = () => {
+                request.removeEventListener("success", onSuccess);
+                request.removeEventListener("error", onError);
+            };
+
+            request.addEventListener("success", onSuccess);
+            request.addEventListener("error", onError);
         });
-      }
+    }
 
     private async getDB(): Promise<IDBDatabase> {
         if (!this.db) {
@@ -103,11 +103,11 @@ export default class IndexDBProvider extends BaseProvider {
             .filter(item => item.path.startsWith(path + '/'))
             .sort((a, b) => b.timestamp - a.timestamp)
             .map(item => [item.data.id, item.data]));
-            
+
         if (Object.keys(filteredResults).length === 0) {
             throw createNoDataError();
         }
-            
+
         return filteredResults as T;
     }
 
@@ -115,7 +115,7 @@ export default class IndexDBProvider extends BaseProvider {
         const store = await this.getStore('readwrite');
         const id = uuidv4();
         const fullPath = `${path}/${id}`;
-        const newData = {...data, id};
+        const newData = { ...data, id };
         const request = store.put({
             path: fullPath,
             data: newData,
@@ -124,18 +124,22 @@ export default class IndexDBProvider extends BaseProvider {
 
         await this.wrap(request);
 
-        return newData as T & {id: string};
+        return newData as T & { id: string };
     }
 
-    async update<T>(path: string, data: Partial<T>): Promise<T> {
+    async update<T>(path: string, data: Partial<T>): Promise<T & { id: string }> {
         const store = await this.getStore('readwrite');
         const result = await this.wrap(store.get(path));
-        
+
         if (!result || !result.data) {
             throw createNoDataError();
         }
 
-        const newData = JSON.parse(JSON.stringify({...result.data, ...data}));
+        const existingData = result.data;
+
+        // This is needed incase we store nested objects in the data
+        // otherwise we are saving references to the original object
+        const newData = JSON.parse(JSON.stringify({ ...existingData, ...data }));
         const request = store.put({
             path: path,
             data: newData,
@@ -144,7 +148,7 @@ export default class IndexDBProvider extends BaseProvider {
 
         await this.wrap(request);
 
-        return newData as T;
+        return newData as T & { id: string };
     }
 
     async delete(path: string): Promise<void> {
