@@ -5,27 +5,24 @@ import { dateTimeStartOfDay } from "@/utils/browser";
 
 
 function generateInitialWeekDates() {
+    const daysSet = new Set<Date>();
     const currentDate = dateTimeStartOfDay();
 
-    const nextDay = dateTimeStartOfDay();
-    nextDay.setDate(currentDate.getDate() + 1);
-
-    const previousDay = dateTimeStartOfDay();
-    previousDay.setDate(currentDate.getDate() - 1);
-
-    const nextDays = Array.from({ length: 4 }, (_, i) => {
+    for (let i = -4; i < 0; i++) {
         const date = dateTimeStartOfDay();
-        date.setDate(nextDay.getDate() + i);
-        return date;
-    });
+        date.setDate(currentDate.getDate() + i);
+        daysSet.add(date);
+    }
 
-    const previousDays = Array.from({ length: 4 }, (_, i) => {
+    daysSet.add(currentDate);
+
+    for (let i = 1; i < 4; i++) {
         const date = dateTimeStartOfDay();
-        date.setDate(previousDay.getDate() - i);
-        return date;
-    });
+        date.setDate(currentDate.getDate() + i);
+        daysSet.add(date);
+    }
 
-    return Array.from(new Set([...previousDays, currentDate, ...nextDays]));
+    return Array.from(daysSet);
 }
 
 const weekDates = generateInitialWeekDates();
