@@ -34,18 +34,13 @@ export default class LocalStorageProvider extends BaseProvider {
 
             let current = root;
             for (const key of keys) {
-                if (!current) {
-                    reject(createNoDataError());
-                    break;
-                }
-
                 if (!current[key]) {
                     reject(createNoDataError());
                     current = null
                     break;
-                } else {
-                    current = current[key];
                 }
+
+                current = current[key];
             }
 
             if (current) {
