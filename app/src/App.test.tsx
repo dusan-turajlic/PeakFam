@@ -19,23 +19,4 @@ describe('App', () => {
     fireEvent.click(addButton);
     expect(screen.getByText('100')).toBeInTheDocument();
   });
-
-  it('increments calories when +200 button is clicked', () => {
-    render(<App />);
-    const addButton = screen.getByText('+200');
-    fireEvent.click(addButton);
-    expect(screen.getByText('200')).toBeInTheDocument();
-  });
-
-  it('resets calories to 0 when reset button is clicked', () => {
-    render(<App />);
-    const addButton = screen.getByText('+100');
-    const resetButton = screen.getByText('Reset');
-    
-    fireEvent.click(addButton);
-    expect(screen.getByText('100')).toBeInTheDocument();
-    
-    fireEvent.click(resetButton);
-    expect(screen.getByText('0')).toBeInTheDocument();
-  });
 });

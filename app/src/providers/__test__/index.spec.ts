@@ -1,5 +1,5 @@
 import { indexedDB as fakeIndexedDB } from "fake-indexeddb";
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import IndexDBProvider from '@/providers/indexDB';
 import createProvider, { type ProviderType } from "@/providers";
 import BaseProvider from "@/providers/base";
@@ -10,23 +10,21 @@ vi.mock('@/providers/indexDB/db', () => ({
 
 let storage: Record<string, string> = {};
 
-const localStorageMock = {
-  getItem: vi.fn((key: string) => {
-    return storage[key];
-  }),
-  setItem: vi.fn((key: string, value: string) => {
-    storage[key] = value;
-  }),
-  removeItem: vi.fn((key: string) => {
-    delete storage[key];
-  }),
-  clear: vi.fn(() => {
-    storage = {};
-  }),
-};
-
-vi.mock('@/providers/localstorage/localStorage', () => ({
-  default: localStorageMock,
+vi.mock('@/providers/localstorage/storage', () => ({
+  default: {
+    getItem: vi.fn((key: string) => {
+      return storage[key];
+    }),
+    setItem: vi.fn((key: string, value: string) => {
+      storage[key] = value;
+    }),
+    removeItem: vi.fn((key: string) => {
+      delete storage[key];
+    }),
+    clear: vi.fn(() => {
+      storage = {};
+    }),
+  },
 }));
 
 describe.each(['local', 'indexDB'])('createProvider($0)', (providerType) => {
