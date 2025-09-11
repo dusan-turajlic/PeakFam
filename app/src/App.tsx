@@ -1,8 +1,12 @@
-import WeekDaySelector from './components/WeekDaySelector';
+import WeekDaySelector from '@/components/WeekDaySelector';
+import DiaryTracker from '@/components/DiaryTracker';
 
 function App() {
   return (
-    <WeekDaySelector />
+    <div>
+      <WeekDaySelector />
+      <DiaryTracker />
+    </div>
   );
 }
 

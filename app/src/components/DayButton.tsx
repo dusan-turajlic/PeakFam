@@ -1,4 +1,4 @@
-import { USER_LOCAL_LANGUAGE } from "@/utils/browser";
+import { dateWithShortName } from "@/utils/browser";
 
 interface DayButtonProps {
     id: string;
@@ -15,7 +15,7 @@ function DayButton({
     isToday,
     onClick
 }: DayButtonProps) {
-    const dayAbbreviation = date.toLocaleDateString(USER_LOCAL_LANGUAGE, { weekday: 'narrow' });
+    const dayAbbreviation = dateWithShortName(date);
     const dayNumber = date.getDate();
 
     return (
