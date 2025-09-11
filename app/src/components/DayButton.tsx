@@ -21,6 +21,7 @@ function DayButton({
     return (
         <button
             id={id}
+            data-testid={id}
             onClick={() => onClick(date)}
             className={`${[
                 'w-16 h-16 rounded-full flex flex-col items-center justify-center text-white font-medium mx-1 px-2 py-1 transition-all',

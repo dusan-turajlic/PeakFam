@@ -1,5 +1,6 @@
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 function generateTimeStamps() {
     const today = dateTimeStartOfDay();
@@ -36,10 +37,13 @@ function DiaryTracker() {
                                     />
                                 ) : null}
                                 <div className="relative flex space-x-1">
-                                    <div>
-                                        <span className="items-center min-w-13 text-center rounded-full bg-gray-500 px-2 py-1 text-xs font-medium text-white">
+                                    <div className="flex space-x-1">
+                                        <span className="items-center justify-center min-w-13 text-center rounded-full bg-gray-500 px-2 py-1 text-xs font-medium text-white">
                                             {label}
                                         </span>
+                                        <button type="button" className="items-center justify-center text-center rounded-full bg-gray-500 p-1 font-medium text-white">
+                                            <PlusIcon aria-hidden="true" className="size-4" />
+                                        </button>
                                     </div>
                                     <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                                         {/** Food content goes here */}
