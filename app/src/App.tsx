@@ -1,12 +1,16 @@
-import WeekDaySelector from '@/components/WeekDaySelector';
-import DiaryTracker from '@/components/DiaryTracker';
+import { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+
+const Tracker = lazy(() => import("@/views/Tracker"));
 
 function App() {
   return (
-    <div>
-      <WeekDaySelector />
-      <DiaryTracker />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Tracker />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

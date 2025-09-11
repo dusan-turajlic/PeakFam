@@ -4,7 +4,7 @@ import LocalStorageProvider from "@/providers/localstorage";
 
 const ACTIVE_PROVIDERS: Record<string, BaseProvider> = {}
 
-export type ProviderType = 'local' | 'api' | 'indexDB';
+export type ProviderType = 'local' | 'indexDB';
 
 export default function createProvider(provider: ProviderType = 'indexDB') {
     if (ACTIVE_PROVIDERS[provider]) {
@@ -18,9 +18,6 @@ export default function createProvider(provider: ProviderType = 'indexDB') {
         case 'indexDB':
             ACTIVE_PROVIDERS.indexDB = new IndexDBProvider();
             return ACTIVE_PROVIDERS.indexDB;
-        case 'api':
-            console.log('API Provider not implemented yet');
-            return ACTIVE_PROVIDERS.local;
         default:
             return ACTIVE_PROVIDERS.local;
     }

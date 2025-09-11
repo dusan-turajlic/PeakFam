@@ -101,7 +101,7 @@ function WeekDaySelector() {
 
     return (
         <div className="w-full">
-            <div ref={emblaRef} className="bg-gray-800 overflow-hidden">
+            <div ref={emblaRef} role="listbox" className="bg-gray-800 overflow-hidden">
                 <div className="flex">
                     {weeks.map((week) => (
                         <div key={week.map(({ uuid }) => uuid).join('-')} className="embla__container w-full flex justify-center items-center p-4">
