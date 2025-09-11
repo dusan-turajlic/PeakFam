@@ -4,11 +4,12 @@ export const USER_LOCAL_LANGUAGE = globalThis.navigator.language;
 
 export type DateStartOfDay = ReturnType<typeof dateTimeStartOfDay>
 
-export function dateTimeStartOfDay(date: Date = new Date()) {
-    date.setHours(0, 0, 0, 0);
+export function dateTimeStartOfDay(date?: Date) {
+    const d = new Date(date ?? new Date());
+    d.setHours(0, 0, 0, 0);
     return {
-        uuid: createDateUUID(date),
-        date
+        uuid: createDateUUID(d),
+        date: d
     };
 }
 
