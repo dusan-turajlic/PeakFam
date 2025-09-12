@@ -27,7 +27,7 @@ function FoodLoggerDialog() {
             "
                 >
                     <DialogTitle as="h3" className="text-base/7 font-medium text-white mb-4">
-                        Quick Actuons
+                        Quick Actions
                     </DialogTitle>
                     <div className="flex gap-2">
                         <Button

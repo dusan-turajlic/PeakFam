@@ -25,7 +25,7 @@ describe('FoodLoggerDialog', () => {
     it('renders dialog title', () => {
         render(<FoodLoggerDialogWithProvider store={store} />);
 
-        expect(screen.getByRole('heading', { name: 'Quick Actuons' })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: 'Quick Actions' })).toBeInTheDocument();
     });
 
     it('renders action buttons', () => {
