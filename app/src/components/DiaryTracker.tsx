@@ -1,6 +1,9 @@
+import { loggerDialog } from "@/atoms/loggerDialog";
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
+import { Button } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useSetAtom } from "jotai";
 
 function generateTimeStamps() {
     const today = dateTimeStartOfDay();
@@ -15,6 +18,7 @@ function generateTimeStamps() {
 }
 
 function DiaryTracker() {
+    const setOpen = useSetAtom(loggerDialog);
     const times = generateTimeStamps();
     const today = dateTimeStartOfDay();
     return (
@@ -38,12 +42,12 @@ function DiaryTracker() {
                                 ) : null}
                                 <div className="relative flex space-x-1">
                                     <div className="flex space-x-1">
-                                        <span className="items-center justify-center min-w-13 text-center rounded-full bg-gray-500 px-2 py-1 text-xs font-medium text-white">
+                                        <span className="items-center justify-center min-w-13 text-center rounded-full bg-gray-500 px-2 py-1 mr-2 text-xs font-medium text-white">
                                             {label}
                                         </span>
-                                        <button type="button" className="items-center justify-center text-center rounded-full bg-gray-500 p-1 font-medium text-white">
-                                            <PlusIcon aria-hidden="true" className="size-4" />
-                                        </button>
+                                        <Button onClick={() => { setOpen(true) }} className="flex items-center justify-center self-center text-center rounded-full bg-gray-500 w-5 h-5 font-medium text-white">
+                                            <PlusIcon aria-hidden="true" className="size-3" />
+                                        </Button>
                                     </div>
                                     <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                                         {/** Food content goes here */}

@@ -1,7 +1,6 @@
-import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import { expect, it, describe, vi, beforeEach, afterEach } from "vitest";
 import WeekDaySelector from "../WeekDaySelector";
-import { createDateUUID } from "@/utils/uuid";
 import { dateTimeStartOfDay } from "@/utils/browser";
 
 // Mock embla-carousel-react
