@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
-import TabMenu from "./components/TabMenu";
-import FoodLoggerDialog from "./components/FoodLoggerDialog";
+import TabMenu from "@/components/TabMenu";
+import FoodLoggerDialog from "@/components/Dialog/FoodLoggerDialog";
 
 const Tracker = lazy(() => import("@/views/Tracker"));
 

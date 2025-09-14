@@ -1,4 +1,4 @@
-import { loggerDialog } from "@/atoms/loggerDialog";
+import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import {
     PlusIcon,
     EllipsisHorizontalCircleIcon,
@@ -7,10 +7,10 @@ import {
     FireIcon
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 
 export default function TabMenu() {
-    const setOpen = useSetAtom(loggerDialog);
+    const [state, setState] = useAtom(loggerDialog);
     return (
         <>
             <div className="h-20" />
@@ -36,7 +36,7 @@ export default function TabMenu() {
                         </li>
 
                         <li>
-                            <button type="button" onClick={() => setOpen(true)} className="block -mt-8 rounded-full bg-white w-16 h-16 flex items-center justify-center m-auto shadow-lg ring-1 ring-neutral-300">
+                            <button type="button" onClick={() => setState({ ...state, open: true, state: LoggerDialogState.DEFAULT })} className="block -mt-8 rounded-full bg-white w-16 h-16 flex items-center justify-center m-auto shadow-lg ring-1 ring-neutral-300">
                                 <PlusIcon className="h-8 w-8 text-black" aria-hidden="true" />
                             </button>
                         </li>

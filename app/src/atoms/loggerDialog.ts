@@ -1,3 +1,12 @@
 import { atom } from "jotai";
 
-export const loggerDialog = atom(false);
+export const LoggerDialogState = {
+    DEFAULT: "DEFAULT",
+    LAUNCHER: "LAUNCHER",
+}
+
+export const loggerDialog = atom({
+    open: false,
+    state: LoggerDialogState.DEFAULT,
+    metadata: {},
+});

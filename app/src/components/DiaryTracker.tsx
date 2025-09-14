@@ -1,13 +1,13 @@
-import { loggerDialog } from "@/atoms/loggerDialog";
+import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
 import { Button } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 
 function generateTimeStamps() {
     const today = dateTimeStartOfDay();
-    const trackableHouers = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    const trackableHouers = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     const tracableTime = trackableHouers.map((time) => {
         const date = new Date(today.date);
         date.setHours(time)
@@ -18,7 +18,7 @@ function generateTimeStamps() {
 }
 
 function DiaryTracker() {
-    const setOpen = useSetAtom(loggerDialog);
+    const [state, setState] = useAtom(loggerDialog);
     const times = generateTimeStamps();
     const today = dateTimeStartOfDay();
     return (
@@ -45,7 +45,7 @@ function DiaryTracker() {
                                         <span className="items-center justify-center min-w-13 text-center rounded-full bg-gray-500 px-2 py-1 mr-2 text-xs font-medium text-white">
                                             {label}
                                         </span>
-                                        <Button onClick={() => { setOpen(true) }} className="flex items-center justify-center self-center text-center rounded-full bg-gray-500 w-5 h-5 font-medium text-white">
+                                        <Button onClick={() => { setState({ ...state, open: true, state: LoggerDialogState.LAUNCHER, metadata: { id: uuid } }) }} className="flex items-center justify-center self-center text-center rounded-full bg-gray-500 w-5 h-5 font-medium text-white">
                                             <PlusIcon aria-hidden="true" className="size-3" />
                                         </Button>
                                     </div>

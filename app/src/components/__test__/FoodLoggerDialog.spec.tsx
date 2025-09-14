@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, it, describe, beforeEach } from "vitest";
-import FoodLoggerDialog from "../FoodLoggerDialog";
+import FoodLoggerDialog from "../Dialog/FoodLoggerDialog";
 import { createStore, Provider } from "jotai";
 import { loggerDialog } from "@/atoms/loggerDialog";
 
