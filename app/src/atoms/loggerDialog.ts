@@ -5,8 +5,13 @@ export const LoggerDialogState = {
     LAUNCHER: "LAUNCHER",
 }
 
+interface LoggerDialogMetadata {
+    tab?: string;
+    id?: string;
+}
+
 export const loggerDialog = atom({
     open: false,
     state: LoggerDialogState.DEFAULT,
-    metadata: {},
+    metadata: {} as LoggerDialogMetadata,
 });

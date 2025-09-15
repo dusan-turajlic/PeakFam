@@ -1,0 +1,1320 @@
+[
+  {
+    "icon": "icons8-alcoholic-beverage-licensing",
+    "description": "A simple icon depicting alcoholic beverage licensing",
+    "relatedCategories": [
+      "alcoholic-beverages",
+      "non-alcoholic-beers",
+      "non-alcoholic-beverages",
+      "premixed-alcoholic-beverages"
+    ]
+  },
+  {
+    "icon": "icons8-almond-butter",
+    "description": "A simple icon depicting almond butter",
+    "relatedCategories": [
+      "almond-based-drinks",
+      "almond-butters",
+      "almond-turron",
+      "almonds"
+    ]
+  },
+  {
+    "icon": "icons8-american-pancakes",
+    "description": "A simple icon depicting american pancakes",
+    "relatedCategories": [
+      "pancakes"
+    ]
+  },
+  {
+    "icon": "icons8-apple-fruit",
+    "description": "A simple icon depicting apple fruit",
+    "relatedCategories": [
+      "apples",
+      "fruits"
+    ]
+  },
+  {
+    "icon": "icons8-apple-jam",
+    "description": "A simple icon depicting apple jam",
+    "relatedCategories": [
+      "apples",
+      "fruits"
+    ]
+  },
+  {
+    "icon": "icons8-baguette",
+    "description": "A simple icon depicting baguette",
+    "relatedCategories": [
+      "baguettes",
+      "breads"
+    ]
+  },
+  {
+    "icon": "icons8-banana",
+    "description": "A simple icon depicting banana",
+    "relatedCategories": [
+      "bananas",
+      "fruits"
+    ]
+  },
+  {
+    "icon": "icons8-banana-split",
+    "description": "A simple icon depicting banana split",
+    "relatedCategories": [
+      "bananas",
+      "fruits"
+    ]
+  },
+  {
+    "icon": "icons8-birthday-cake",
+    "description": "A simple icon depicting birthday cake",
+    "relatedCategories": [
+      "cakes",
+      "biscuits-and-cakes"
+    ]
+  },
+  {
+    "icon": "icons8-biscuits",
+    "description": "A simple icon depicting biscuits",
+    "relatedCategories": [
+      "anzac-biscuits",
+      "biscuits",
+      "biscuits-and-cakes",
+      "biscuits-and-crackers"
+    ]
+  },
+  {
+    "icon": "icons8-bitten-ice-pop",
+    "description": "A simple icon depicting bitten ice pop",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-black-pepper",
+    "description": "A simple icon depicting black pepper",
+    "relatedCategories": [
+      "black-peppers",
+      "herbs-and-spices"
+    ]
+  },
+  {
+    "icon": "icons8-black-sesame-seeds",
+    "description": "A simple icon depicting black sesame seeds",
+    "relatedCategories": [
+      "black-olives",
+      "black-peppers",
+      "black-pudding",
+      "black-teas"
+    ]
+  },
+  {
+    "icon": "icons8-brazil-nut",
+    "description": "A simple icon depicting brazil nut",
+    "relatedCategories": [
+      "nuts",
+      "nuts-and-their-products"
+    ]
+  },
+  {
+    "icon": "icons8-bread",
+    "description": "A simple icon depicting bread",
+    "relatedCategories": [
+      "breads",
+      "bakery-products"
+    ]
+  },
+  {
+    "icon": "icons8-bread-and-rolling-pin",
+    "description": "A simple icon depicting bread and rolling pin",
+    "relatedCategories": [
+      "breads",
+      "bakery-products"
+    ]
+  },
+  {
+    "icon": "icons8-bread-crumbs",
+    "description": "A simple icon depicting bread crumbs",
+    "relatedCategories": [
+      "breads",
+      "bakery-products"
+    ]
+  },
+  {
+    "icon": "icons8-bread-loaf",
+    "description": "A simple icon depicting bread loaf",
+    "relatedCategories": [
+      "breads",
+      "bakery-products"
+    ]
+  },
+  {
+    "icon": "icons8-broccoli",
+    "description": "A simple icon depicting broccoli",
+    "relatedCategories": [
+      "broccoli",
+      "vegetables"
+    ]
+  },
+  {
+    "icon": "icons8-cake",
+    "description": "A simple icon depicting cake",
+    "relatedCategories": [
+      "cakes",
+      "biscuits-and-cakes"
+    ]
+  },
+  {
+    "icon": "icons8-carrot",
+    "description": "A simple icon depicting carrot",
+    "relatedCategories": [
+      "carrots",
+      "vegetables"
+    ]
+  },
+  {
+    "icon": "icons8-cashew",
+    "description": "A simple icon depicting cashew",
+    "relatedCategories": [
+      "cashew-nuts"
+    ]
+  },
+  {
+    "icon": "icons8-chard",
+    "description": "A simple icon depicting chard",
+    "relatedCategories": [
+      "fisch-sardina-pilchardus-walbaum",
+      "grilled-european-pilchard"
+    ]
+  },
+  {
+    "icon": "icons8-cheese",
+    "description": "A simple icon depicting cheese",
+    "relatedCategories": [
+      "cheeses"
+    ]
+  },
+  {
+    "icon": "icons8-cheesecake",
+    "description": "A simple icon depicting cheesecake",
+    "relatedCategories": [
+      "cheesecakes"
+    ]
+  },
+  {
+    "icon": "icons8-cherry",
+    "description": "A simple icon depicting cherry",
+    "relatedCategories": [
+      "cherry-jams",
+      "cherry-tomatoes"
+    ]
+  },
+  {
+    "icon": "icons8-cherry-cheesecake",
+    "description": "A simple icon depicting cherry cheesecake",
+    "relatedCategories": [
+      "cherry-jams",
+      "cherry-tomatoes",
+      "cheesecakes"
+    ]
+  },
+  {
+    "icon": "icons8-cherry-chupa-chups",
+    "description": "A simple icon depicting cherry chupa chups",
+    "relatedCategories": [
+      "cherry-jams",
+      "cherry-tomatoes"
+    ]
+  },
+  {
+    "icon": "icons8-chia-seeds",
+    "description": "A simple icon depicting chia seeds",
+    "relatedCategories": [
+      "birra-chiara",
+      "chia",
+      "graines-de-chia-bio",
+      "cucurbitacea-seeds"
+    ]
+  },
+  {
+    "icon": "icons8-chicken-nugget",
+    "description": "A simple icon depicting chicken nugget",
+    "relatedCategories": [
+      "chicken-and-its-products",
+      "poultries"
+    ]
+  },
+  {
+    "icon": "icons8-chocolate-bar",
+    "description": "A simple icon depicting chocolate bar",
+    "relatedCategories": [
+      "chocolates",
+      "chocolate-candies"
+    ]
+  },
+  {
+    "icon": "icons8-chocolate-ice-cream",
+    "description": "A simple icon depicting chocolate ice cream",
+    "relatedCategories": [
+      "chocolates",
+      "chocolate-candies"
+    ]
+  },
+  {
+    "icon": "icons8-chocolate-truffle",
+    "description": "A simple icon depicting chocolate truffle",
+    "relatedCategories": [
+      "chocolates",
+      "chocolate-candies"
+    ]
+  },
+  {
+    "icon": "icons8-cinnamon-roll",
+    "description": "A simple icon depicting cinnamon roll",
+    "relatedCategories": [
+      "cinnamon",
+      "bread-rolls",
+      "milk-bread-rolls",
+      "rolled-flakes"
+    ]
+  },
+  {
+    "icon": "icons8-cinnamon-sticks",
+    "description": "A simple icon depicting cinnamon sticks",
+    "relatedCategories": [
+      "cinnamon",
+      "breadsticks",
+      "chicken-drumsticks"
+    ]
+  },
+  {
+    "icon": "icons8-citrus",
+    "description": "A simple icon depicting citrus",
+    "relatedCategories": [
+      "citrus",
+      "citrus-jams"
+    ]
+  },
+  {
+    "icon": "icons8-coconut-milk",
+    "description": "A simple icon depicting coconut milk",
+    "relatedCategories": [
+      "milks",
+      "cow-milks"
+    ]
+  },
+  {
+    "icon": "icons8-cookies",
+    "description": "A simple icon depicting cookies",
+    "relatedCategories": [
+      "chocolate-chip-cookies",
+      "drop-cookies",
+      "oat-bran-cookies",
+      "oatmeal-cookies"
+    ]
+  },
+  {
+    "icon": "icons8-cotton-candy",
+    "description": "A simple icon depicting cotton candy",
+    "relatedCategories": [
+      "candies"
+    ]
+  },
+  {
+    "icon": "icons8-croissant",
+    "description": "A simple icon depicting croissant",
+    "relatedCategories": [
+      "croissants",
+      "viennoiseries"
+    ]
+  },
+  {
+    "icon": "icons8-curry",
+    "description": "A simple icon depicting curry",
+    "relatedCategories": [
+      "curry-pastes",
+      "curry-sauces",
+      "gelbes-curry",
+      "ketchup-curry"
+    ]
+  },
+  {
+    "icon": "icons8-cut-melon",
+    "description": "A simple icon depicting cut melon",
+    "relatedCategories": [
+      "breaded-meat-cutlets",
+      "breaded-turkey-cutlets",
+      "charcuteries-cuites",
+      "charcuteries-diverses"
+    ]
+  },
+  {
+    "icon": "icons8-cut-watermelon",
+    "description": "A simple icon depicting cut watermelon",
+    "relatedCategories": [
+      "breaded-meat-cutlets",
+      "breaded-turkey-cutlets",
+      "charcuteries-cuites",
+      "charcuteries-diverses"
+    ]
+  },
+  {
+    "icon": "icons8-cute-pumpkin",
+    "description": "A simple icon depicting cute pumpkin",
+    "relatedCategories": [
+      "charcuteries-cuites",
+      "charcuteries-diverses",
+      "pumpkin-and-squash-plant-products",
+      "pumpkin-seeds"
+    ]
+  },
+  {
+    "icon": "icons8-deliver-food",
+    "description": "A simple icon depicting deliver food",
+    "relatedCategories": [
+      "baby-foods",
+      "canned-foods",
+      "canned-plant-based-foods",
+      "christmas-foods-and-drinks"
+    ]
+  },
+  {
+    "icon": "icons8-dim-sum",
+    "description": "A simple icon depicting dim sum",
+    "relatedCategories": [
+      "condiments",
+      "dim-sum",
+      "consumos-de-tabaco"
+    ]
+  },
+  {
+    "icon": "icons8-double-chocolate-cake",
+    "description": "A simple icon depicting double chocolate cake",
+    "relatedCategories": [
+      "chocolates",
+      "chocolate-candies",
+      "cakes",
+      "biscuits-and-cakes"
+    ]
+  },
+  {
+    "icon": "icons8-dumplings",
+    "description": "A simple icon depicting dumplings",
+    "relatedCategories": [
+      "korean-dumplings"
+    ]
+  },
+  {
+    "icon": "icons8-edamame-beans",
+    "description": "A simple icon depicting edamame beans",
+    "relatedCategories": [
+      "baked-beans-in-tomato-sauce",
+      "canned-common-beans",
+      "canned-green-beans",
+      "coffee-beans"
+    ]
+  },
+  {
+    "icon": "icons8-falafel",
+    "description": "A simple icon depicting falafel",
+    "relatedCategories": [
+      "falafels"
+    ]
+  },
+  {
+    "icon": "icons8-fallen-ice-cream-cone",
+    "description": "A simple icon depicting fallen ice cream cone",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-firm-tofu",
+    "description": "A simple icon depicting firm tofu",
+    "relatedCategories": [
+      "tofu",
+      "plant-based-foods"
+    ]
+  },
+  {
+    "icon": "icons8-fish-and-vegetables",
+    "description": "A simple icon depicting fish and vegetables",
+    "relatedCategories": [
+      "fishes",
+      "seafood"
+    ]
+  },
+  {
+    "icon": "icons8-fish-food",
+    "description": "A simple icon depicting fish food",
+    "relatedCategories": [
+      "fishes",
+      "seafood"
+    ]
+  },
+  {
+    "icon": "icons8-flax-seeds",
+    "description": "A simple icon depicting flax seeds",
+    "relatedCategories": [
+      "flax-seeds",
+      "cucurbitacea-seeds",
+      "legume-seeds",
+      "pumpkin-seeds"
+    ]
+  },
+  {
+    "icon": "icons8-flour",
+    "description": "A simple icon depicting flour",
+    "relatedCategories": [
+      "cereal-flours",
+      "common-wheat-flours",
+      "flours",
+      "nut-flours"
+    ]
+  },
+  {
+    "icon": "icons8-food-and-wine",
+    "description": "A simple icon depicting food and wine",
+    "relatedCategories": [
+      "wines",
+      "alcoholic-beverages"
+    ]
+  },
+  {
+    "icon": "icons8-gingerbread-house",
+    "description": "A simple icon depicting gingerbread house",
+    "relatedCategories": [
+      "gingerbread-blocks",
+      "gingerbreads"
+    ]
+  },
+  {
+    "icon": "icons8-grains-of-rice",
+    "description": "A simple icon depicting grains of rice",
+    "relatedCategories": [
+      "rices"
+    ]
+  },
+  {
+    "icon": "icons8-granulated-garlic",
+    "description": "A simple icon depicting granulated garlic",
+    "relatedCategories": [
+      "garlic",
+      "herbs-and-spices"
+    ]
+  },
+  {
+    "icon": "icons8-grapes",
+    "description": "A simple icon depicting grapes",
+    "relatedCategories": [
+      "grapes"
+    ]
+  },
+  {
+    "icon": "icons8-guacamole",
+    "description": "A simple icon depicting guacamole",
+    "relatedCategories": [
+      "guacamoles"
+    ]
+  },
+  {
+    "icon": "icons8-hamburger",
+    "description": "A simple icon depicting hamburger",
+    "relatedCategories": [
+      "hamburger-buns",
+      "hamburgers"
+    ]
+  },
+  {
+    "icon": "icons8-hazelnut",
+    "description": "A simple icon depicting hazelnut",
+    "relatedCategories": [
+      "breakfast-cereals-filled-with-chocolate-hazelnuts",
+      "chocolates-with-hazelnuts",
+      "cocoa-and-hazelnuts-spreads",
+      "hazelnut-spreads"
+    ]
+  },
+  {
+    "icon": "icons8-healthy-food",
+    "description": "A simple icon depicting healthy food",
+    "relatedCategories": [
+      "baby-foods",
+      "canned-foods",
+      "canned-plant-based-foods",
+      "christmas-foods-and-drinks"
+    ]
+  },
+  {
+    "icon": "icons8-hemp-milk",
+    "description": "A simple icon depicting hemp milk",
+    "relatedCategories": [
+      "milks",
+      "cow-milks"
+    ]
+  },
+  {
+    "icon": "icons8-honey-pot-and-bee",
+    "description": "A simple icon depicting honey pot and bee",
+    "relatedCategories": [
+      "honeys",
+      "flower-honeys"
+    ]
+  },
+  {
+    "icon": "icons8-hummus",
+    "description": "A simple icon depicting hummus",
+    "relatedCategories": [
+      "hummus"
+    ]
+  },
+  {
+    "icon": "icons8-ice-cream-cone",
+    "description": "A simple icon depicting ice cream cone",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-cream-in-waffle",
+    "description": "A simple icon depicting ice cream in waffle",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-cream-in-waffle-cone",
+    "description": "A simple icon depicting ice cream in waffle cone",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-cream-pink-cone",
+    "description": "A simple icon depicting ice cream pink cone",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-cream-sundae",
+    "description": "A simple icon depicting ice cream sundae",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-pop-50-2.png",
+    "description": "A simple icon depicting ice pop 50 2.",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-pop-50-3.png",
+    "description": "A simple icon depicting ice pop 50 3.",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-pop",
+    "description": "A simple icon depicting ice pop",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ice-pop-pink",
+    "description": "A simple icon depicting ice pop pink",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-ingredients",
+    "description": "A simple icon depicting ingredients",
+    "relatedCategories": [
+      "toppings-ingredients"
+    ]
+  },
+  {
+    "icon": "icons8-italian-pizza",
+    "description": "A simple icon depicting italian pizza",
+    "relatedCategories": [
+      "pizzas",
+      "pizzas-pies-and-quiches"
+    ]
+  },
+  {
+    "icon": "icons8-jam",
+    "description": "A simple icon depicting jam",
+    "relatedCategories": [
+      "apricot-jams",
+      "berry-jams",
+      "bilberries-jams",
+      "cherry-jams"
+    ]
+  },
+  {
+    "icon": "icons8-juice-bottle",
+    "description": "A simple icon depicting juice bottle",
+    "relatedCategories": [
+      "fruit-juices",
+      "juices-and-nectars",
+      "beverages"
+    ]
+  },
+  {
+    "icon": "icons8-kale",
+    "description": "A simple icon depicting kale",
+    "relatedCategories": [
+      "curly-kale"
+    ]
+  },
+  {
+    "icon": "icons8-kfc-chicken",
+    "description": "A simple icon depicting kfc chicken",
+    "relatedCategories": [
+      "chicken-and-its-products",
+      "poultries"
+    ]
+  },
+  {
+    "icon": "icons8-korean-rice-cake",
+    "description": "A simple icon depicting korean rice cake",
+    "relatedCategories": [
+      "rices",
+      "cakes",
+      "biscuits-and-cakes"
+    ]
+  },
+  {
+    "icon": "icons8-lentil",
+    "description": "A simple icon depicting lentil",
+    "relatedCategories": [
+      "green-lentils",
+      "lentil-dishes",
+      "lentils"
+    ]
+  },
+  {
+    "icon": "icons8-list-view",
+    "description": "A simple icon depicting list view",
+    "relatedCategories": [
+      "barcode-item-number-clearly-listed-on-packaging-unsure-if-either-is-trackable"
+    ]
+  },
+  {
+    "icon": "icons8-maple-syrup",
+    "description": "A simple icon depicting maple syrup",
+    "relatedCategories": [
+      "maple-syrups",
+      "agave-syrups",
+      "elderflower-syrups",
+      "flavoured-syrups"
+    ]
+  },
+  {
+    "icon": "icons8-melting-ice-cream",
+    "description": "A simple icon depicting melting ice cream",
+    "relatedCategories": [
+      "apple-juice-concentrates",
+      "apple-juices",
+      "aromatic-rices",
+      "basmati-rices"
+    ]
+  },
+  {
+    "icon": "icons8-merry-pie",
+    "description": "A simple icon depicting merry pie",
+    "relatedCategories": [
+      "apple-pies",
+      "candy-chocolate-pieces",
+      "chicken-gravy-shortcrust-pastry-pie",
+      "frozen-pizzas-and-pies"
+    ]
+  },
+  {
+    "icon": "icons8-mushroom",
+    "description": "A simple icon depicting mushroom",
+    "relatedCategories": [
+      "canned-champignon-mushrooms",
+      "canned-mushrooms",
+      "champignon-mushrooms",
+      "mushrooms"
+    ]
+  },
+  {
+    "icon": "icons8-natural-food",
+    "description": "A simple icon depicting natural food",
+    "relatedCategories": [
+      "atun-claro-al-natural",
+      "carbonated-natural-mineral-waters",
+      "natural-herbs",
+      "natural-mineral-waters"
+    ]
+  },
+  {
+    "icon": "icons8-no-celery",
+    "description": "A simple icon depicting no celery",
+    "relatedCategories": [
+      "bagnodoccia",
+      "barres-croquantes-aux-7-grains-quinoa",
+      "beaujolais-nouveau",
+      "biscotti-con-grano-saraceno-e-zucchero-di-canna"
+    ]
+  },
+  {
+    "icon": "icons8-noodles",
+    "description": "A simple icon depicting noodles",
+    "relatedCategories": [
+      "instant-noodles",
+      "noodles",
+      "stir-fry-noodles"
+    ]
+  },
+  {
+    "icon": "icons8-nut",
+    "description": "A simple icon depicting nut",
+    "relatedCategories": [
+      "nuts",
+      "nuts-and-their-products"
+    ]
+  },
+  {
+    "icon": "icons8-oat-milk",
+    "description": "A simple icon depicting oat milk",
+    "relatedCategories": [
+      "milks",
+      "cow-milks"
+    ]
+  },
+  {
+    "icon": "icons8-orange-soda",
+    "description": "A simple icon depicting orange soda",
+    "relatedCategories": [
+      "orange-juices",
+      "citrus",
+      "sodas",
+      "carbonated-drinks"
+    ]
+  },
+  {
+    "icon": "icons8-organic-food",
+    "description": "A simple icon depicting organic food",
+    "relatedCategories": [
+      "organic",
+      "organic-coconut-water",
+      "organic-cookies",
+      "baby-foods"
+    ]
+  },
+  {
+    "icon": "icons8-pancake-stack",
+    "description": "A simple icon depicting pancake stack",
+    "relatedCategories": [
+      "pancake-mixes",
+      "pancakes"
+    ]
+  },
+  {
+    "icon": "icons8-pancakes",
+    "description": "A simple icon depicting pancakes",
+    "relatedCategories": [
+      "pancakes"
+    ]
+  },
+  {
+    "icon": "icons8-pastel-de-nata",
+    "description": "A simple icon depicting pastel de nata",
+    "relatedCategories": [
+      "aiguillettes-de-poulet",
+      "alimentos-de-origen-vegetal-en-conserva",
+      "aliments-et-boissons-a-base-de-vegetaux",
+      "allumettes-de-porc"
+    ]
+  },
+  {
+    "icon": "icons8-peach",
+    "description": "A simple icon depicting peach",
+    "relatedCategories": [
+      "peach-jams"
+    ]
+  },
+  {
+    "icon": "icons8-peanut-butter",
+    "description": "A simple icon depicting peanut butter",
+    "relatedCategories": [
+      "peanut-butter-fudge",
+      "peanut-butters",
+      "peanuts",
+      "roasted-peanuts"
+    ]
+  },
+  {
+    "icon": "icons8-peanuts",
+    "description": "A simple icon depicting peanuts",
+    "relatedCategories": [
+      "peanuts",
+      "roasted-peanuts"
+    ]
+  },
+  {
+    "icon": "icons8-pecan",
+    "description": "A simple icon depicting pecan",
+    "relatedCategories": [
+      "toffee-pecan"
+    ]
+  },
+  {
+    "icon": "icons8-pie",
+    "description": "A simple icon depicting pie",
+    "relatedCategories": [
+      "apple-pies",
+      "candy-chocolate-pieces",
+      "chicken-gravy-shortcrust-pastry-pie",
+      "frozen-pizzas-and-pies"
+    ]
+  },
+  {
+    "icon": "icons8-piece-of-lemon-cake",
+    "description": "A simple icon depicting piece of lemon cake",
+    "relatedCategories": [
+      "citrus",
+      "cakes",
+      "biscuits-and-cakes"
+    ]
+  },
+  {
+    "icon": "icons8-pink-macaron",
+    "description": "A simple icon depicting pink macaron",
+    "relatedCategories": [
+      "pink-peppers",
+      "macarons"
+    ]
+  },
+  {
+    "icon": "icons8-porridge",
+    "description": "A simple icon depicting porridge",
+    "relatedCategories": [
+      "porridge"
+    ]
+  },
+  {
+    "icon": "icons8-pretzel",
+    "description": "A simple icon depicting pretzel",
+    "relatedCategories": [
+      "pretzel"
+    ]
+  },
+  {
+    "icon": "icons8-pumpkin",
+    "description": "A simple icon depicting pumpkin",
+    "relatedCategories": [
+      "pumpkin-and-squash-plant-products",
+      "pumpkin-seeds",
+      "pumpkin-seeds-and-their-products",
+      "pumpkins-and-their-products"
+    ]
+  },
+  {
+    "icon": "icons8-rack-of-lamb",
+    "description": "A simple icon depicting rack of lamb",
+    "relatedCategories": [
+      "barcode-item-number-clearly-listed-on-packaging-unsure-if-either-is-trackable",
+      "biscuits-and-crackers",
+      "crackers-appetizers",
+      "balsamic-vinegars-of-modena"
+    ]
+  },
+  {
+    "icon": "icons8-raisins",
+    "description": "A simple icon depicting raisins",
+    "relatedCategories": [
+      "raisins",
+      "sultana-raisins"
+    ]
+  },
+  {
+    "icon": "icons8-raspberry",
+    "description": "A simple icon depicting raspberry",
+    "relatedCategories": [
+      "raspberry-jams"
+    ]
+  },
+  {
+    "icon": "icons8-rice-bowl",
+    "description": "A simple icon depicting rice bowl",
+    "relatedCategories": [
+      "rices"
+    ]
+  },
+  {
+    "icon": "icons8-rice-vinegar",
+    "description": "A simple icon depicting rice vinegar",
+    "relatedCategories": [
+      "rices"
+    ]
+  },
+  {
+    "icon": "icons8-rolled-oats",
+    "description": "A simple icon depicting rolled oats",
+    "relatedCategories": [
+      "rolled-flakes",
+      "rolled-oats",
+      "groats"
+    ]
+  },
+  {
+    "icon": "icons8-salad",
+    "description": "A simple icon depicting salad",
+    "relatedCategories": [
+      "salads"
+    ]
+  },
+  {
+    "icon": "icons8-salami-pizza",
+    "description": "A simple icon depicting salami pizza",
+    "relatedCategories": [
+      "pizzas",
+      "pizzas-pies-and-quiches"
+    ]
+  },
+  {
+    "icon": "icons8-salt",
+    "description": "A simple icon depicting salt",
+    "relatedCategories": [
+      "salts",
+      "sea-salts"
+    ]
+  },
+  {
+    "icon": "icons8-sandwich",
+    "description": "A simple icon depicting sandwich",
+    "relatedCategories": [
+      "sandwiches"
+    ]
+  },
+  {
+    "icon": "icons8-sandwich-with-fried-egg",
+    "description": "A simple icon depicting sandwich with fried egg",
+    "relatedCategories": [
+      "sandwiches",
+      "eggs",
+      "chicken-eggs"
+    ]
+  },
+  {
+    "icon": "icons8-sauce",
+    "description": "A simple icon depicting sauce",
+    "relatedCategories": [
+      "applesauces",
+      "arrabbiata-sauces",
+      "baked-beans-in-tomato-sauce",
+      "barbecue-sauces"
+    ]
+  },
+  {
+    "icon": "icons8-seafood",
+    "description": "A simple icon depicting seafood",
+    "relatedCategories": [
+      "frozen-seafood",
+      "seafood",
+      "seafood-fishes-fish-fillets-mackerels-mackerels-fillets"
+    ]
+  },
+  {
+    "icon": "icons8-sesame-oil",
+    "description": "A simple icon depicting sesame oil",
+    "relatedCategories": [
+      "caramels-de-sesames",
+      "sesame",
+      "sesame-oils",
+      "aromatised-olive-oils"
+    ]
+  },
+  {
+    "icon": "icons8-silken-tofu",
+    "description": "A simple icon depicting silken tofu",
+    "relatedCategories": [
+      "tofu",
+      "plant-based-foods"
+    ]
+  },
+  {
+    "icon": "icons8-slice-of-watermelon",
+    "description": "A simple icon depicting slice of watermelon",
+    "relatedCategories": [
+      "cooked-chicken-breast-slices",
+      "cooked-turkey-breast-slices",
+      "sliced-breads",
+      "sliced-cheeses"
+    ]
+  },
+  {
+    "icon": "icons8-smoked-paprika",
+    "description": "A simple icon depicting smoked paprika",
+    "relatedCategories": [
+      "smoked-bacon-chips",
+      "smoked-fishes",
+      "smoked-lardons",
+      "smoked-salmons"
+    ]
+  },
+  {
+    "icon": "icons8-soda-water",
+    "description": "A simple icon depicting soda water",
+    "relatedCategories": [
+      "sodas",
+      "carbonated-drinks",
+      "waters",
+      "mineral-waters",
+      "spring-waters"
+    ]
+  },
+  {
+    "icon": "icons8-soy-sauce",
+    "description": "A simple icon depicting soy sauce",
+    "relatedCategories": [
+      "soy-based-drinks",
+      "soy-milk-yogurts",
+      "soy-sauces",
+      "sweetened-plain-soy-based-drinks"
+    ]
+  },
+  {
+    "icon": "icons8-spaghetti",
+    "description": "A simple icon depicting spaghetti",
+    "relatedCategories": [
+      "spaghetti",
+      "pastas"
+    ]
+  },
+  {
+    "icon": "icons8-spam-can",
+    "description": "A simple icon depicting spam can",
+    "relatedCategories": [
+      "canned-foods"
+    ]
+  },
+  {
+    "icon": "icons8-spinach",
+    "description": "A simple icon depicting spinach",
+    "relatedCategories": [
+      "spinach-cheese-bake",
+      "spinachs"
+    ]
+  },
+  {
+    "icon": "icons8-squash",
+    "description": "A simple icon depicting squash",
+    "relatedCategories": [
+      "pumpkin-and-squash-plant-products"
+    ]
+  },
+  {
+    "icon": "icons8-strawberry",
+    "description": "A simple icon depicting strawberry",
+    "relatedCategories": [
+      "strawberry-jams",
+      "strawberry-yogurts"
+    ]
+  },
+  {
+    "icon": "icons8-strawberry-cheesecake",
+    "description": "A simple icon depicting strawberry cheesecake",
+    "relatedCategories": [
+      "strawberry-jams",
+      "strawberry-yogurts",
+      "cheesecakes"
+    ]
+  },
+  {
+    "icon": "icons8-sugar-cube",
+    "description": "A simple icon depicting sugar cube",
+    "relatedCategories": [
+      "brown-sugars",
+      "cane-sugar",
+      "sugar-free-chewing-gum",
+      "sugar-substitutes"
+    ]
+  },
+  {
+    "icon": "icons8-sunflower-butter",
+    "description": "A simple icon depicting sunflower butter",
+    "relatedCategories": [
+      "potato-crisps-in-sunflower-oil",
+      "sprouted-sunflower-seeds",
+      "sunflower-oils",
+      "sunflower-seeds"
+    ]
+  },
+  {
+    "icon": "icons8-sunny-side-up-eggs",
+    "description": "A simple icon depicting sunny side up eggs",
+    "relatedCategories": [
+      "appetizers-sides",
+      "beef-soup"
+    ]
+  },
+  {
+    "icon": "icons8-tiffin",
+    "description": "A simple icon depicting sunny side up eggs",
+    "relatedCategories": [
+      "bodybuilding-supplements"
+    ]
+  },
+  {
+    "icon": "icons8-sushi",
+    "description": "A simple icon depicting sushi",
+    "relatedCategories": [
+      "sushi-and-maki",
+      "sushis"
+    ]
+  },
+  {
+    "icon": "icons8-takeaway-hot-drink",
+    "description": "A simple icon depicting takeaway hot drink",
+    "relatedCategories": [
+      "hot-beverages",
+      "hot-sauces",
+      "slimming-world-chicken-and-ham-hotpot",
+      "alkaline-chocolate-drink"
+    ]
+  },
+  {
+    "icon": "icons8-the-toast",
+    "description": "A simple icon depicting the toast",
+    "relatedCategories": [
+      "barcode-item-number-clearly-listed-on-packaging-unsure-if-either-is-trackable",
+      "cereals-and-their-products",
+      "cheeses-from-the-united-kingdom",
+      "cheeses-of-the-netherlands"
+    ]
+  },
+  {
+    "icon": "icons8-tin-can",
+    "description": "A simple icon depicting tin can",
+    "relatedCategories": [
+      "canned-foods"
+    ]
+  },
+  {
+    "icon": "icons8-tomato",
+    "description": "A simple icon depicting tomato",
+    "relatedCategories": [
+      "tomatoes",
+      "tomato-sauces"
+    ]
+  },
+  {
+    "icon": "icons8-topping",
+    "description": "A simple icon depicting topping",
+    "relatedCategories": [
+      "toppings-ingredients"
+    ]
+  },
+  {
+    "icon": "icons8-vegan-food",
+    "description": "A simple icon depicting vegan food",
+    "relatedCategories": [
+      "chips-vegan",
+      "plat-vegan",
+      "producto-vegano",
+      "produtos-vegano"
+    ]
+  },
+  {
+    "icon": "icons8-vegetable-bouillion-paste",
+    "description": "A simple icon depicting vegetable bouillion paste",
+    "relatedCategories": [
+      "canned-vegetables",
+      "cooked-vegetables",
+      "cream-of-vegetable-soups",
+      "dried-vegetables"
+    ]
+  },
+  {
+    "icon": "icons8-vegetarian-food",
+    "description": "A simple icon depicting vegetarian food",
+    "relatedCategories": [
+      "vegetarian-balls",
+      "vegetarian-patties",
+      "vegetarian-pizzas",
+      "vegetarian-sausages"
+    ]
+  },
+  {
+    "icon": "icons8-white-sesame-seeds",
+    "description": "A simple icon depicting white sesame seeds",
+    "relatedCategories": [
+      "minced-white-fish",
+      "white-asparagus",
+      "white-beans",
+      "white-breads"
+    ]
+  },
+  {
+    "icon": "icons8-whole-melon",
+    "description": "A simple icon depicting whole melon",
+    "relatedCategories": [
+      "cooked-unsalted-wholemeal-dried-pasta",
+      "pre-cooked-whole-wheat",
+      "whole-chickens",
+      "whole-foies-gras"
+    ]
+  },
+  {
+    "icon": "icons8-whole-watermelon",
+    "description": "A simple icon depicting whole watermelon",
+    "relatedCategories": [
+      "cooked-unsalted-wholemeal-dried-pasta",
+      "pre-cooked-whole-wheat",
+      "whole-chickens",
+      "whole-foies-gras"
+    ]
+  },
+  {
+    "icon": "icons8-yogurt",
+    "description": "A simple icon depicting yogurt",
+    "relatedCategories": [
+      "yogurts",
+      "dairy-desserts"
+    ]
+  }
+]

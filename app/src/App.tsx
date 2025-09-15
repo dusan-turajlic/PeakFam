@@ -7,18 +7,16 @@ const Tracker = lazy(() => import("@/views/Tracker"));
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/food-log" replace />} />
-          <Route path="/food-log" element={<Tracker />} />
-          <Route path="/strategy" element={<Navigate to="/food-log" replace />} />
-          <Route path="/more" element={<Navigate to="/food-log" replace />} />
-        </Routes>
-        <TabMenu />
-        <FoodLoggerDialog />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/food-log" replace />} />
+        <Route path="/food-log" element={<Tracker />} />
+        <Route path="/strategy" element={<Navigate to="/food-log" replace />} />
+        <Route path="/more" element={<Navigate to="/food-log" replace />} />
+      </Routes>
+      <TabMenu />
+      <FoodLoggerDialog />
+    </BrowserRouter>
   );
 }
 

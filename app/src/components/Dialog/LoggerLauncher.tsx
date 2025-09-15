@@ -14,6 +14,11 @@ const tabs = [
 
 export default function LoggerLauncher() {
     const [state, setState] = useAtom(loggerDialog)
+    const { metadata } = state
+    let selectIndex = tabs.findIndex(tab => tab.key === metadata?.tab)
+    if (selectIndex === -1) {
+        selectIndex = 1
+    }
     return (
         <>
             <div className="h-3"></div>
@@ -22,7 +27,7 @@ export default function LoggerLauncher() {
                 className="relative flex bg-white rounded-full p-2 mx-2 mb-4">
                 <XMarkIcon className="size-5 text-black" />
             </Button>
-            <TabGroup defaultIndex={1}>
+            <TabGroup selectedIndex={selectIndex}>
                 <TabList className="flex w-auto space-x-2 text-white border-b border-gray-500 flex nowrap overflow-x-auto px-2 relative">
                     {tabs.map((tab) => (
                         <Tab as={Fragment} key={tab.name}>

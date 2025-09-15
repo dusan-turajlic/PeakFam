@@ -1,21 +1,6 @@
-const API_URL = import.meta.env.VITE_OPEN_FOOD_DEX_API_URL;
+import type { IOpenFoodDexObject } from "@/modals";
 
-export interface OpenFoodDexObject {
-    code: string;
-    name?: string;
-    brand?: string;
-    creator?: string;
-    main_category?: string;
-    path: string;
-    categories?: string[];
-    macros?: {
-        kcal?: number;
-        serving_size?: string;
-        p: number;
-        f?: number;
-        c?: number;
-    };
-}
+const API_URL = import.meta.env.VITE_OPEN_FOOD_DEX_API_URL;
 
 function ndjsonObjectsFromGzip(gzipReadable: ReadableStream, freeText: string) {
     const decompressed = gzipReadable.pipeThrough(new DecompressionStream('gzip'));
@@ -29,9 +14,13 @@ function ndjsonObjectsFromGzip(gzipReadable: ReadableStream, freeText: string) {
                 buf = lines.pop() ?? '';
                 for (const line of lines) {
                     if (!line) continue;
-                    const obj = JSON.parse(line) as OpenFoodDexObject;
+                    const obj = JSON.parse(line) as IOpenFoodDexObject;
+                    const hasMacrosAndCalories = obj.macros?.kcal && obj.macros?.p && obj.macros?.f && obj.macros?.c;
                     if (
-                        obj.name?.toLowerCase() === freeText.toLowerCase()
+                        hasMacrosAndCalories && (
+                            obj.name?.toLowerCase().includes(freeText.toLowerCase()) ||
+                            obj.brand?.toLowerCase().includes(freeText.toLowerCase())
+                        )
                     ) {
                         controller.enqueue(obj);
                     }
@@ -44,7 +33,7 @@ function ndjsonObjectsFromGzip(gzipReadable: ReadableStream, freeText: string) {
         }));
 }
 
-export async function* searchGenerator(freeText: string): AsyncGenerator<OpenFoodDexObject, void, unknown> {
+export async function* searchGenerator(freeText: string): AsyncGenerator<IOpenFoodDexObject, void, unknown> {
     const res = await fetch(`${API_URL}/indexes/catalog.jsonl.gz`);
     if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
 
@@ -56,10 +45,10 @@ export async function* searchGenerator(freeText: string): AsyncGenerator<OpenFoo
     const reader = objStream.getReader();
 
     try {
-        while (true) {
-            const { value: obj, done } = await reader.read();
-            if (done) break;
-            yield obj; // Yield each result as it's found
+        let result = await reader.read();
+        while (!result.done) {
+            yield result.value; // Yield each result as it's found
+            result = await reader.read();
         }
     } finally {
         reader.releaseLock();
