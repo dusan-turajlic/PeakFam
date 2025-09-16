@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import storage from '@/providers/localstorage/storage';
 
 export const STORE_ROOT = 'APP_ROOT';
+export const STORE_VERSION = 1;
 
 const createNoDataError = () => new Error('No Data Found');
 
@@ -13,15 +14,15 @@ function handlePath(path: string) {
 export default class LocalStorageProvider extends BaseProvider {
     store = storage;
 
-    constructor() {
-        super();
+    constructor(dbName?: string, dbVersion?: number) {
+        super(dbName ?? STORE_ROOT, dbVersion ?? STORE_VERSION);
 
     }
 
     private _getRoot() {
-        const item = this.store.getItem(STORE_ROOT);
+        const item = this.store.getItem(this.dbName);
         if (!item) {
-            this.store.setItem(STORE_ROOT, '{}');
+            this.store.setItem(this.dbName, '{}');
             return {};
         }
         return JSON.parse(item);
@@ -70,13 +71,20 @@ export default class LocalStorageProvider extends BaseProvider {
                 }
                 const newData = { ...data, id };
                 (current[keys[keys.length - 1]] as Record<string, unknown>)[id] = newData;
-                this.store.setItem(STORE_ROOT, JSON.stringify(root));
+                this.store.setItem(this.dbName, JSON.stringify(root));
                 resolve(newData);
             } catch (error) {
                 console.error(`cannot find ${path} in storage`, error);
                 reject(error);
             }
         });
+    }
+
+    async createMany<T>(dataArray: { path: string, data: T }[]): Promise<void> {
+        for (const item of dataArray) {
+            await this.create(item.path, item.data);
+        }
+        return;
     }
 
     async update<T>(path: string, data: Partial<T>): Promise<T> {
@@ -102,7 +110,7 @@ export default class LocalStorageProvider extends BaseProvider {
 
                 const newData = JSON.parse(JSON.stringify({ ...current[keys[keys.length - 1]], ...data }));
                 current[keys[keys.length - 1]] = newData;
-                this.store.setItem(STORE_ROOT, JSON.stringify(root));
+                this.store.setItem(this.dbName, JSON.stringify(root));
                 resolve(current[keys[keys.length - 1]] as T);
             } catch (error) {
                 console.error(`cannot find ${path} in storage`, error);
@@ -123,7 +131,7 @@ export default class LocalStorageProvider extends BaseProvider {
                 }
 
                 delete current[keys[keys.length - 1]];
-                this.store.setItem(STORE_ROOT, JSON.stringify(root));
+                this.store.setItem(this.dbName, JSON.stringify(root));
                 resolve(void 0);
             } catch (error) {
                 console.error(`cannot find ${path} in storage`, error);

@@ -12,8 +12,8 @@ export default class IndexDBProvider extends BaseProvider {
     private db: IDBDatabase | null = null;
     private dbPromise: Promise<IDBDatabase> | null = null;
 
-    constructor() {
-        super();
+    constructor(dbName?: string, dbVersion?: number) {
+        super(dbName ?? DB_NAME, dbVersion ?? DB_VERSION);
         this.initDB();
     }
 
@@ -23,7 +23,7 @@ export default class IndexDBProvider extends BaseProvider {
         }
 
         this.dbPromise = new Promise((resolve, reject) => {
-            const request = IndexDB.open(DB_NAME, DB_VERSION);
+            const request = IndexDB.open(this.dbName, this.dbVersion);
 
             request.onerror = () => {
                 reject(new Error('Failed to open IndexDB'));
@@ -125,6 +125,24 @@ export default class IndexDBProvider extends BaseProvider {
         await this.wrap(request);
 
         return newData as T & { id: string };
+    }
+
+    async createMany<T>(dataArray: { path: string, data: T }[]): Promise<void> {
+        const store = await this.getStore('readwrite');
+
+        for await (const item of dataArray) {
+            const id = uuidv4();
+            const fullPath = `${item.path}/${id}`;
+            const newData = { ...item.data, id };
+
+            const request = store.put({
+                path: fullPath,
+                data: newData,
+                timestamp: Date.now()
+            });
+
+            await this.wrap(request);
+        }
     }
 
     async update<T>(path: string, data: Partial<T>): Promise<T & { id: string }> {

@@ -55,7 +55,7 @@ export async function* searchGenerator(freeText: string): AsyncGenerator<IOpenFo
     }
 }
 
-export async function getProductByBarcode(barcode: string): Promise<IOpenFoodDexObject | null> {
+export async function searchByBarcode(barcode: string): Promise<IOpenFoodDexObject | null> {
     const res = await fetch(`${API_URL}/products/${barcode}.json`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();

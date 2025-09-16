@@ -1,0 +1,1 @@
+export const FOOD_DEX_URL = import.meta.env.VITE_OPEN_FOOD_DEX_API_URL;
