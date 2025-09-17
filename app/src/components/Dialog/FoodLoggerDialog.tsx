@@ -2,11 +2,12 @@ import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { useAtom } from "jotai";
 import LoggerQuickActions from "./LoggerQuickActions";
-import LoggerLauncher from "./LoggerLauncher";
+import LoggerLauncher from "@/components/Dialog/LoggerLauncher";
+import FoodItem from "@/components/Dialog/FoodItem";
 
 function FoodLoggerDialog() {
     const [state, setState] = useAtom(loggerDialog)
-    const { state: dialogState, metadata } = state
+    const { state: dialogState } = state
 
     return (
         <Dialog
@@ -30,6 +31,7 @@ function FoodLoggerDialog() {
                 >
                     {dialogState === LoggerDialogState.DEFAULT && <LoggerQuickActions />}
                     {dialogState === LoggerDialogState.LAUNCHER && <LoggerLauncher />}
+                    {dialogState === LoggerDialogState.FOOD_ITEM && <FoodItem />}
                 </DialogPanel>
             </div>
         </Dialog>

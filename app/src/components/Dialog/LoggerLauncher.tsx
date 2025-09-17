@@ -2,7 +2,7 @@ import { Button, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui
 import { useAtom } from "jotai"
 import { MagnifyingGlassIcon, QrCodeIcon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { loggerDialog } from "@/atoms/loggerDialog"
-import { Fragment, useEffect, useRef } from "react"
+import { Fragment, useState } from "react"
 import LauncherTabs from "./LauncherTabs"
 
 const tabs = [
@@ -15,10 +15,8 @@ const tabs = [
 export default function LoggerLauncher() {
     const [state, setState] = useAtom(loggerDialog)
     const { metadata } = state
-    let selectIndex = tabs.findIndex(tab => tab.key === metadata?.tab)
-    if (selectIndex === -1) {
-        selectIndex = 1
-    }
+    const tabIndex = tabs.findIndex(tab => tab.key === metadata?.tab)
+    const [selectedIndex, setSelectedIndex] = useState(tabIndex === -1 ? 1 : tabIndex)
     return (
         <>
             <div className="h-3"></div>
@@ -27,12 +25,12 @@ export default function LoggerLauncher() {
                 className="relative flex bg-white rounded-full p-2 mx-2 mb-4">
                 <XMarkIcon className="size-5 text-black" />
             </Button>
-            <TabGroup selectedIndex={selectIndex}>
+            <TabGroup selectedIndex={selectedIndex}>
                 <TabList className="flex w-auto space-x-2 text-white border-b border-gray-500 flex nowrap overflow-x-auto px-2 relative">
-                    {tabs.map((tab) => (
+                    {tabs.map((tab, index) => (
                         <Tab as={Fragment} key={tab.name}>
                             {({ selected }) => (
-                                <Button className={[
+                                <Button onClick={() => setSelectedIndex(index)} className={[
                                     'flex items-center flex-row flex-nowrap whitespace-nowrap border-b-2 px-5 py-3 text-sm font-medium text-center scrollbar-hide',
                                     selected
                                         ? 'border-blue-400'

@@ -5,18 +5,20 @@ import type { IOpenFoodDexObject } from '@/modals'
 
 interface FoodItemProps extends Partial<IOpenFoodDexObject> {
     foodIcon: string;
-    name: string;
 }
 
-function calculateCaloriesBasedOnMacros(macros: Partial<IOpenFoodDexObject['macros']>) {
+function calculateCaloriesBasedOnMacros(macros: Partial<IOpenFoodDexObject>) {
     if (macros?.p === undefined || macros?.f === undefined || macros?.c === undefined) {
         return 0;
     }
     return macros.p * 4 + macros.f * 9 + macros.c * 4;
 }
 
-export default function FoodItem({ foodIcon, name, brand, macros }: FoodItemProps) {
-    const calories = macros?.kcal ? macros.kcal : calculateCaloriesBasedOnMacros(macros);
+export default function FoodItem({ foodIcon, ...foodItem }: FoodItemProps) {
+    const { k, n, b, p, f, c } = foodItem;
+    const calories = k ? k : calculateCaloriesBasedOnMacros(foodItem);
+    const name = n ?? 'Unknown';
+    const brand = b ?? 'Unknown';
     return (
         <div className="relative flex gap-x-4 py-6 ml-2 xl:static">
             <img
@@ -37,9 +39,9 @@ export default function FoodItem({ foodIcon, name, brand, macros }: FoodItemProp
                             )}
                         </dt>
                         <dd className="flex flex-row items-center justify-center gap-x-3">
-                            {macros?.p !== undefined && <span className="text-xs">{`${Math.round(macros?.p)}`.trim()}P</span>}
-                            {macros?.f !== undefined && <span className="text-xs">{`${Math.round(macros?.f)}`.trim()}F</span>}
-                            {macros?.c !== undefined && <span className="text-xs">{`${Math.round(macros?.c)}`.trim()}C</span>}
+                            {p !== undefined && <span className="text-xs">{`${Math.round(p)}`.trim()}P</span>}
+                            {f !== undefined && <span className="text-xs">{`${Math.round(f)}`.trim()}F</span>}
+                            {c !== undefined && <span className="text-xs">{`${Math.round(c)}`.trim()}C</span>}
                         </dd>
                     </div>
                     <div className="flex items-center justify-center gap-x-2 text-xs">

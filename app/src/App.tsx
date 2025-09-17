@@ -2,13 +2,13 @@ import { lazy } from "react";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import TabMenu from "@/components/TabMenu";
 import FoodLoggerDialog from "@/components/Dialog/FoodLoggerDialog";
-import { useOpenFoodDex } from "@/hooks/useOpenFoodDex";
-import { FOOD_DEX_URL } from "./constants";
+// import { useOpenFoodDex } from "@/hooks/useOpenFoodDex";
+// import { FOOD_DEX_URL } from "./constants";
 
 const Tracker = lazy(() => import("@/views/Tracker"));
 
 function App() {
-  useOpenFoodDex(`${FOOD_DEX_URL}/indexes/catalog.jsonl.gz`);
+  // useOpenFoodDex(`${FOOD_DEX_URL}/indexes/catalog.jsonl.gz`);
   return (
     <BrowserRouter>
       <Routes>

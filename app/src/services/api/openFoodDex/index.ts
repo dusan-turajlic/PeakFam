@@ -1,4 +1,4 @@
-import type { IOpenFoodDexObject } from "@/modals";
+import type { IOpenFoodDexObject, Product } from "@/modals";
 
 const API_URL = import.meta.env.VITE_OPEN_FOOD_DEX_API_URL;
 
@@ -15,11 +15,11 @@ function ndjsonObjectsFromGzip(gzipReadable: ReadableStream, freeText: string) {
                 for (const line of lines) {
                     if (!line) continue;
                     const obj = JSON.parse(line) as IOpenFoodDexObject;
-                    const hasMacrosAndCalories = obj.macros?.kcal && obj.macros?.p && obj.macros?.f && obj.macros?.c;
+                    const hasMacrosAndCalories = obj.k && obj.p && obj.f && obj.c;
                     if (
                         hasMacrosAndCalories && (
-                            obj.name?.toLowerCase().includes(freeText.toLowerCase()) ||
-                            obj.brand?.toLowerCase().includes(freeText.toLowerCase())
+                            obj.n?.toLowerCase().includes(freeText.toLowerCase()) ||
+                            obj.b?.toLowerCase().includes(freeText.toLowerCase())
                         )
                     ) {
                         controller.enqueue(obj);
@@ -55,7 +55,7 @@ export async function* searchGenerator(freeText: string): AsyncGenerator<IOpenFo
     }
 }
 
-export async function searchByBarcode(barcode: string): Promise<IOpenFoodDexObject | null> {
+export async function searchByBarcode(barcode: string): Promise<Product | null> {
     const res = await fetch(`${API_URL}/products/${barcode}.json`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
