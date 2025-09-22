@@ -55,8 +55,8 @@ export default function Search() {
             <div className="relative top-0 h-[80vh] text-white mb-20 overflow-y-auto">
                 <ol ref={resultRef} className="divide-y divide-gray-100">
                     {results.map((result) => (
-                        <li key={result.i}>
-                            <FoodItem foodIcon={getIconBasedOnCategories(result.cat ?? [])} {...result} />
+                        <li key={result.code}>
+                            <FoodItem foodIcon={getIconBasedOnCategories(result.categories ?? [])} {...result} />
                         </li>
                     ))}
                     {isSearching && (

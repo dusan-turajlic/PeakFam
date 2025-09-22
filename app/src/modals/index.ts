@@ -1,15 +1,38 @@
+export type IOpenFoodDexArray = [
+    // code
+    string?,
+    // name
+    string?,
+    // brand
+    string?,
+    // categories
+    string[]?,
+    // serving_size
+    number?,
+    // serving_unit
+    string?,
+    // fiber
+    number?,
+    // carbs
+    number?,
+    // fat
+    number?,
+    // protein
+    number?,
+];
+
 export interface IOpenFoodDexObject {
-    i: string;              // code
-    n?: string;             // name
-    b?: string;             // brand
-    cat: string[];          // categories
-    k?: number;             // kcal
-    s?: number;             // serving_size
-    u?: string;             // serving_unit
-    er?: number;            // fiber
-    c?: number;             // carbs
-    f?: number;             // fat
-    p?: number;             // protein
+    code: string;
+    name: string;
+    brand: string;
+    categories: string[];
+    kcal?: number;
+    serving_size?: number;
+    serving_unit?: string;
+    fiber?: number;
+    carbs?: number;
+    fat?: number;
+    protein?: number;
 }
 
 

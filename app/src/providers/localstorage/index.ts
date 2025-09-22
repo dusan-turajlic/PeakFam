@@ -1,4 +1,4 @@
-import BaseProvider from "../base";
+import BaseProvider, { type IBaseSearchQuary } from "../base";
 import { v4 as uuidv4 } from 'uuid';
 import storage from '@/providers/localstorage/storage';
 
@@ -26,6 +26,29 @@ export default class LocalStorageProvider extends BaseProvider {
             return {};
         }
         return JSON.parse(item);
+    }
+
+    async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
+        throw new Error(`Not implemented for ${path} and ${JSON.stringify(query)}`);
+    }
+
+
+    async getAll<T>(path: string): Promise<T[]> {
+        return new Promise((resolve, reject) => {
+            const root = this._getRoot();
+            const keys = handlePath(path);
+
+            try {
+                let current = root;
+                for (const key of keys) {
+                    current = current[key];
+                }
+
+                resolve(current as T[]);
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 
     async get<T>(path: string): Promise<T> {

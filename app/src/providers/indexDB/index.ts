@@ -1,4 +1,4 @@
-import BaseProvider from "@/providers/base";
+import BaseProvider, { type IBaseSearchQuary } from "@/providers/base";
 import { v4 as uuidv4 } from 'uuid';
 import IndexDB from '@/providers/indexDB/db';
 
@@ -85,13 +85,8 @@ export default class IndexDBProvider extends BaseProvider {
         return transaction.objectStore(DB_STORE_NAME);
     }
 
-    async get<T>(path: string): Promise<T> {
+    async getAll<T>(path: string): Promise<T[]> {
         const store = await this.getStore('readonly');
-        const lookForPath = await this.wrap(store.get(path));
-        if (lookForPath && lookForPath.data) {
-            return lookForPath.data as T;
-        }
-
         const result = await this.wrap(store.getAll());
 
         if (!result) {
@@ -99,23 +94,66 @@ export default class IndexDBProvider extends BaseProvider {
         }
 
         // Filter results that start with the given path
-        const filteredResults = Object.fromEntries(result
-            .filter(item => item.path.startsWith(path + '/'))
+        return Object.fromEntries(result.filter(item => item.path.startsWith(path + '/'))
             .sort((a, b) => b.timestamp - a.timestamp)
-            .map(item => [item.data.id, item.data]));
+            .map(item => [item.data.id, item.data])) as T[];
+    }
 
-        if (Object.keys(filteredResults).length === 0) {
+    async get<T>(path: string): Promise<T> {
+        const store = await this.getStore('readonly');
+        const lookForPath = await this.wrap(store.get(path));
+        if (!lookForPath || !lookForPath.path.startsWith(path + '/')) {
             throw createNoDataError();
         }
 
-        return filteredResults as T;
+        return lookForPath.data as T;
     }
 
-    async create<T>(path: string, data: T) {
+    async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
+        const store = await this.getStore('readonly');
+        const index = store.index('path');
+
+        const range = IDBKeyRange.bound(path, path + '\uffff');
+
+        for await (const cursorPromise of this._iterateCursor(index, range)) {
+            const cursor = await cursorPromise;
+            if (!cursor) {
+                break;
+            }
+
+            const data = cursor.value.data;
+            const [key] = Object.keys(query);
+            const queryValue = query[key];
+            if (queryValue.fuzzy) {
+                if (data[key].includes(queryValue.fuzzy)) {
+                    console.log('fuzzy', data);
+                    yield data;
+                }
+            }
+            if (queryValue.exact) {
+                if (data[key] === queryValue.exact) {
+                    console.log('exact', data);
+                    yield data;
+                }
+            }
+        }
+    }
+
+    private async *_iterateCursor(source: IDBObjectStore | IDBIndex, range: IDBKeyRange | null) {
+        const cursorPromise = this.wrap(source.openCursor(range));
+        yield cursorPromise;
+        const cursor = await cursorPromise;
+
+        while (cursor) {
+            debugger;
+            cursor?.continue();
+            yield this.wrap(cursor?.request);
+        }
+    }
+
+    async create<T>(path: string, data: T, generateId: boolean = true) {
         const store = await this.getStore('readwrite');
-        const id = uuidv4();
-        const fullPath = `${path}/${id}`;
-        const newData = { ...data, id };
+        const { fullPath, newData } = this._createRecord(path, data, generateId);
         const request = store.put({
             path: fullPath,
             data: newData,
@@ -127,13 +165,11 @@ export default class IndexDBProvider extends BaseProvider {
         return newData as T & { id: string };
     }
 
-    async createMany<T>(dataArray: { path: string, data: T }[]): Promise<void> {
+    async createMany<T>(dataArray: { path: string, data: T }[], generateId: boolean = true): Promise<void> {
         const store = await this.getStore('readwrite');
 
         for await (const item of dataArray) {
-            const id = uuidv4();
-            const fullPath = `${item.path}/${id}`;
-            const newData = { ...item.data, id };
+            const { fullPath, newData } = this._createRecord(item.path, item.data, generateId);
 
             const request = store.put({
                 path: fullPath,
@@ -143,6 +179,20 @@ export default class IndexDBProvider extends BaseProvider {
 
             await this.wrap(request);
         }
+    }
+
+    private _createRecord<T>(path: string, data: T, generateId: boolean = true) {
+        if (!generateId) {
+            return {
+                fullPath: path,
+                newData: data
+            };
+        }
+        const id = uuidv4();
+        return {
+            fullPath: `${path}/${id}`,
+            newData: { ...data, id }
+        };
     }
 
     async update<T>(path: string, data: Partial<T>): Promise<T & { id: string }> {

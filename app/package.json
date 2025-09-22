@@ -20,6 +20,7 @@
     "@tailwindcss/vite": "^4.1.12",
     "@types/node": "^24.3.0",
     "autoprefixer": "^10.4.21",
+    "brotli-wasm": "^3.0.1",
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "jotai": "^2.13.1",

@@ -13,10 +13,12 @@ export default function createProvider(provider: ProviderType = 'indexDB', dbNam
 
     switch (provider) {
         case 'local':
-            ACTIVE_PROVIDERS.local = new LocalStorageProvider(dbName, dbVersion);
+            // @ts-ignore
+            ACTIVE_PROVIDERS.local = globalThis.localStorageProvider = new LocalStorageProvider(dbName, dbVersion);
             return ACTIVE_PROVIDERS.local;
         case 'indexDB':
-            ACTIVE_PROVIDERS.indexDB = new IndexDBProvider(dbName, dbVersion);
+            // @ts-ignore
+            ACTIVE_PROVIDERS.indexDB = globalThis.indexDBProvider = new IndexDBProvider(dbName, dbVersion);
             return ACTIVE_PROVIDERS.indexDB;
         default:
             return ACTIVE_PROVIDERS.local;

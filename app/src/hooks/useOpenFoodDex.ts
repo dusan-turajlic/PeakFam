@@ -6,23 +6,37 @@ const provider = createProvider('local');
 const PATH_LOCAL_APP_DATA = '/local/app-data';
 const PATH_OPEN_FOOD_DEX = `${PATH_LOCAL_APP_DATA}/open-food-dex`;
 
-async function startOpenFoodDexWorker(url: string, worker: Worker) {
-    const { exists } = await provider.get<{ exists: boolean }>(PATH_OPEN_FOOD_DEX)
-        .catch(() => ({ exists: false }));
+type OpenFoodDexContent = {
+    [key: string]: {
+        exists: boolean;
+    };
+}
 
-    console.log('exists', exists);
-    if (exists) {
+async function startOpenFoodDexWorker(url: string, worker: Worker) {
+    const triggerWorker = async () => {
+        await provider.create(PATH_OPEN_FOOD_DEX, { exists: true });
+
+        worker.addEventListener('message', async (e) => {
+            if (e.data?.type === 'done') {
+                console.log('done');
+            }
+        });
+
+        worker.postMessage({ type: "start", url });
+    }
+
+    const content = await provider.getAll<OpenFoodDexContent>(PATH_OPEN_FOOD_DEX).catch(() => ({}));
+    if (!Object.keys(content).length) {
+        triggerWorker();
         return;
     }
 
-    worker.addEventListener('message', async (e) => {
-        console.log('worker onmessage', e.data);
-        if (e.data?.type === 'done') {
-            await provider.create(PATH_OPEN_FOOD_DEX, { exists: true });
-        }
-    });
+    const [first] = Object.values(content);
+    if (first.exists) {
+        return;
+    }
 
-    worker.postMessage({ type: "start", url });
+    triggerWorker();
 }
 
 export function useOpenFoodDex(url: string) {

@@ -8,17 +8,15 @@ interface FoodItemProps extends Partial<IOpenFoodDexObject> {
 }
 
 function calculateCaloriesBasedOnMacros(macros: Partial<IOpenFoodDexObject>) {
-    if (macros?.p === undefined || macros?.f === undefined || macros?.c === undefined) {
+    if (macros?.protein === undefined || macros?.fat === undefined || macros?.carbs === undefined) {
         return 0;
     }
-    return macros.p * 4 + macros.f * 9 + macros.c * 4;
+    return macros.protein * 4 + macros.fat * 9 + macros.carbs * 4;
 }
 
 export default function FoodItem({ foodIcon, ...foodItem }: FoodItemProps) {
-    const { k, n, b, p, f, c } = foodItem;
-    const calories = k ? k : calculateCaloriesBasedOnMacros(foodItem);
-    const name = n ?? 'Unknown';
-    const brand = b ?? 'Unknown';
+    const { kcal, name, brand, protein, fat, carbs } = foodItem;
+    const calories = kcal ? kcal : calculateCaloriesBasedOnMacros(foodItem);
     return (
         <div className="relative flex gap-x-4 py-6 ml-2 xl:static">
             <img
@@ -27,7 +25,7 @@ export default function FoodItem({ foodIcon, ...foodItem }: FoodItemProps) {
                 className="size-10 flex-none dark:outline dark:-outline-offset-1 dark:outline-white/10"
             />
             <div className="flex-auto">
-                <p className="text-sm font-semibold">{name} {brand ? `By ${brand}` : ''}</p>
+                <p className="text-sm font-semibold">{name ?? 'Unknown'} {brand ? `By ${brand}` : ''}</p>
                 <dl className="flex">
                     <div className="flex flex-row items-center justify-center gap-x-1">
                         <dt className="flex flex-row items-center justify-center gap-x-1">
@@ -39,9 +37,9 @@ export default function FoodItem({ foodIcon, ...foodItem }: FoodItemProps) {
                             )}
                         </dt>
                         <dd className="flex flex-row items-center justify-center gap-x-3">
-                            {p !== undefined && <span className="text-xs">{`${Math.round(p)}`.trim()}P</span>}
-                            {f !== undefined && <span className="text-xs">{`${Math.round(f)}`.trim()}F</span>}
-                            {c !== undefined && <span className="text-xs">{`${Math.round(c)}`.trim()}C</span>}
+                            {protein !== undefined && <span className="text-xs">{`${Math.round(protein)}`.trim()}P</span>}
+                            {fat !== undefined && <span className="text-xs">{`${Math.round(fat)}`.trim()}F</span>}
+                            {carbs !== undefined && <span className="text-xs">{`${Math.round(carbs)}`.trim()}C</span>}
                         </dd>
                     </div>
                     <div className="flex items-center justify-center gap-x-2 text-xs">

@@ -1,14 +1,14 @@
 // src/worker.ts
 import createProvider from "@/providers";
-import type { IOpenFoodDexObject } from "@/modals";
+import type { IOpenFoodDexArray, IOpenFoodDexObject } from "@/modals";
+import { DB_NAME, DB_VERSION } from ".";
+
 
 type Msg =
     | { type: "start"; url: string }
     | { type: "stop" };
 
-const BATCH_SIZE = 50;
-const DB_NAME = "OPEN_FOOD_DEX_DB";
-const DB_VERSION = 1;
+const BATCH_SIZE = 100;
 
 interface IOpenFoodDexObjectWithPath {
     path: string;
@@ -27,7 +27,13 @@ self.addEventListener("message", (e: MessageEvent<Msg>) => {
 });
 
 async function run(url: string) {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+        headers: new Headers({
+            'Accept': 'application/x-ndjson',
+            'Accept-Encoding': 'br',
+            'Content-Encoding': 'br'
+        })
+    });
     if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
 
     if (typeof (globalThis as any).DecompressionStream !== "function") {
@@ -35,7 +41,6 @@ async function run(url: string) {
     }
 
     const readable = res.body
-        .pipeThrough(new DecompressionStream("gzip"))
         .pipeThrough(new TextDecoderStream())
         .pipeThrough(linesToObjects());
 
@@ -46,7 +51,7 @@ async function run(url: string) {
         async write(obj) {
             batch.push(obj);
             if (batch.length >= BATCH_SIZE) {
-                await provider.createMany(batch);
+                await provider.createMany(batch, false);
                 count += batch.length;
                 batch.length = 0;
                 postMessage({ type: "progress", data: { count } });
@@ -54,7 +59,7 @@ async function run(url: string) {
         },
         async close() {
             if (batch.length) {
-                await provider.createMany(batch);
+                await provider.createMany(batch, false);
                 count += batch.length;
                 batch.length = 0;
                 postMessage({ type: "progress", data: { count } });
@@ -76,19 +81,35 @@ function linesToObjects() {
             buf = lines.pop() ?? "";
             for (const line of lines) {
                 if (!line) continue;
-                const obj = JSON.parse(line) as IOpenFoodDexObject;
+                const [
+                    code,
+                    name,
+                    brand,
+                    categories,
+                    serving_size,
+                    serving_unit,
+                    fiber,
+                    carbs,
+                    fat,
+                    protein
+                ] = JSON.parse(line) as IOpenFoodDexArray;
                 // The object code should always be defined
-                let path = `/products/${obj.code}`;
-                // Name is defined most of the time, but in the case where it isent we don't want to have `null` in the path
-                if (obj.name) {
-                    path += `/name-${obj.name}`;
-                }
+                let path = `/products/name-${name}-brand-${brand}-code-${code}`;
+                const obj: IOpenFoodDexObject = {
+                    code: code ?? "",
+                    name: name ?? "",
+                    brand: brand ?? "",
+                    categories: categories ?? [],
+                    serving_size,
+                    serving_unit,
+                    kcal: getKcal(fiber, carbs, fat, protein),
+                    fiber,
+                    carbs,
+                    fat,
+                    protein
+                };
 
-                // Brand is defined most of the time, but in the case where it isent we don't want to have `null` in the path
-                if (obj.brand) {
-                    path += `/brand-${obj.brand}`;
-                }
-                controller.enqueue({ path: `/products/${obj.code}`, data: obj });
+                controller.enqueue({ path, data: obj });
             }
         },
         flush(controller) {
@@ -96,4 +117,11 @@ function linesToObjects() {
             if (last) controller.enqueue(JSON.parse(last));
         }
     });
+}
+
+function getKcal(fiber?: number, carbs?: number, fat?: number, protein?: number) {
+    if (fiber === undefined || carbs === undefined || fat === undefined || protein === undefined) {
+        return undefined;
+    }
+    return ((carbs * 4) - (fiber * 4)) + (fat * 9) + (protein * 4);
 }
