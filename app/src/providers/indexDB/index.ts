@@ -113,7 +113,7 @@ export default class IndexDBProvider extends BaseProvider {
         const store = await this.getStore('readonly');
         const index = store.index('path');
 
-        const range = IDBKeyRange.bound(path, path + '\uffff');
+        const range = IDBKeyRange.bound(path, path + '\uffff', true, true);
 
         for await (const cursorPromise of this._iterateCursor(index, range)) {
             const cursor = await cursorPromise;
