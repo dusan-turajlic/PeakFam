@@ -18,7 +18,7 @@ interface IOpenFoodDexObjectWithPath {
 const provider = createProvider("sqlite", DB_NAME, DB_VERSION); // create once
 
 self.addEventListener("message", (e: MessageEvent<Msg>) => {
-    console.log("worker onmessage", e.data);
+    console.debug("worker onmessage", e.data);
     if (e.data?.type === "start") {
         run(e.data.url).catch((err) => {
             postMessage({ type: "error", data: { message: String(err?.message ?? err) } });
@@ -36,7 +36,7 @@ async function run(url: string) {
     });
     if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
 
-    if (typeof (globalThis as any).DecompressionStream !== "function") {
+    if (typeof globalThis.DecompressionStream !== "function") {
         throw new Error("DecompressionStream is not supported in this context");
     }
 

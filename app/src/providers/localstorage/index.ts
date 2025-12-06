@@ -36,7 +36,40 @@ export default class LocalStorageProvider extends BaseProvider {
     }
 
     async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
-        throw new Error(`Not implemented for ${path} and ${JSON.stringify(query)}`);
+        const root = this._getRoot();
+        const keys = handlePath(path);
+
+        // Navigate to the target path
+        let current = root;
+        for (const key of keys) {
+            if (!current?.[key]) {
+                return; // No data at path, nothing to yield
+            }
+            current = current[key];
+        }
+
+        if (!current || typeof current !== 'object') {
+            return;
+        }
+
+        const [queryKey] = Object.keys(query);
+        const queryValue = query[queryKey];
+
+        // Iterate through all items and yield matches
+        for (const item of Object.values(current)) {
+            const data = item as Record<string, string>;
+
+            if (queryValue.fuzzy) {
+                if (data[queryKey]?.includes(queryValue.fuzzy)) {
+                    yield data as T;
+                }
+            }
+            if (queryValue.exact) {
+                if (data[queryKey] === queryValue.exact) {
+                    yield data as T;
+                }
+            }
+        }
     }
 
 

@@ -64,7 +64,7 @@ export interface Product {
         per100g?: MacroValues;
     };
     image_url?: string;
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 export interface ProductResponse {

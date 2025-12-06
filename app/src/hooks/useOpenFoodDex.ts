@@ -18,7 +18,7 @@ async function startOpenFoodDexWorker(url: string, worker: Worker) {
 
         worker.addEventListener('message', async (e) => {
             if (e.data?.type === 'done') {
-                console.log('done');
+                console.debug('done');
             }
         });
 

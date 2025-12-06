@@ -1,6 +1,6 @@
 import BaseProvider, { type IBaseSearchQuary, type ProviderOptions } from "@/providers/base";
 import { v4 as uuidv4 } from 'uuid';
-import { initSQLite } from '@subframe7536/sqlite-wasm';
+import { initSQLite, type SQLiteDB } from '@subframe7536/sqlite-wasm';
 import { useIdbStorage } from '@subframe7536/sqlite-wasm/idb';
 
 const DB_STORE_NAME = 'app_store';
@@ -8,14 +8,39 @@ const INACTIVITY_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
 
 const createNoDataError = () => new Error('No Data Found');
 
-type SQLiteFunctions = {
-    run: (sql: string, params?: any[]) => Promise<any[]>;
-    close: () => Promise<void>;
-};
+/** SQLite compatible types - matches the library's internal type */
+type SQLiteCompatibleType = string | number | Uint8Array | bigint | null;
+
+/** Database row structure for our app_store table */
+interface DBRow {
+    path: SQLiteCompatibleType;
+    data: SQLiteCompatibleType;
+    timestamp: SQLiteCompatibleType;
+}
+
+/** Type guard to check if a row has the expected structure */
+function isDBRow(row: Record<string, SQLiteCompatibleType>): row is DBRow & Record<string, SQLiteCompatibleType> {
+    return 'path' in row && 'data' in row;
+}
+
+/** Safely extract string from SQLiteCompatibleType */
+function asString(value: SQLiteCompatibleType): string {
+    if (typeof value === 'string') return value;
+    if (value === null) return '';
+    return String(value);
+}
+
+/** Safely extract number from SQLiteCompatibleType */
+function asNumber(value: SQLiteCompatibleType): number {
+    if (typeof value === 'number') return value;
+    if (typeof value === 'bigint') return Number(value);
+    if (value === null) return 0;
+    return Number(value);
+}
 
 export default class SQLiteProvider extends BaseProvider {
-    private sqlite: SQLiteFunctions | null = null;
-    private initPromise: Promise<SQLiteFunctions> | null = null;
+    private sqlite: SQLiteDB | null = null;
+    private initPromise: Promise<SQLiteDB> | null = null;
     private inactivityTimer: ReturnType<typeof setTimeout> | null = null;
     private readonly options: ProviderOptions | undefined;
 
@@ -25,7 +50,7 @@ export default class SQLiteProvider extends BaseProvider {
         // Don't initialize on construction - use lazy initialization
     }
 
-    private async initDB(): Promise<SQLiteFunctions> {
+    private async initDB(): Promise<SQLiteDB> {
         if (this.initPromise) {
             return this.initPromise;
         }
@@ -36,12 +61,12 @@ export default class SQLiteProvider extends BaseProvider {
                 // Can be overridden via options.wasmUrl
                 const defaultWasmUrl = '/wa-sqlite-async.wasm';
                 const storageOptions = { url: this.options?.wasmUrl ?? defaultWasmUrl };
-                const { run, close } = await initSQLite(
+                const db = await initSQLite(
                     useIdbStorage(`${this.dbName}.db`, storageOptions)
                 );
 
                 // Create table if it doesn't exist
-                await run(`
+                await db.run(`
                     CREATE TABLE IF NOT EXISTS ${DB_STORE_NAME} (
                         path TEXT PRIMARY KEY,
                         data TEXT NOT NULL,
@@ -50,11 +75,11 @@ export default class SQLiteProvider extends BaseProvider {
                 `);
 
                 // Create index on path for faster queries
-                await run(`
+                await db.run(`
                     CREATE INDEX IF NOT EXISTS idx_path ON ${DB_STORE_NAME}(path)
                 `);
 
-                this.sqlite = { run, close };
+                this.sqlite = db;
                 this.resetInactivityTimer();
                 return this.sqlite;
             } catch (error) {
@@ -95,7 +120,7 @@ export default class SQLiteProvider extends BaseProvider {
         }
     }
 
-    private async getSQLite(): Promise<SQLiteFunctions> {
+    private async getSQLite(): Promise<SQLiteDB> {
         // If connection is closed, reinitialize
         if (this.sqlite) {
             // Reset inactivity timer on each use
@@ -131,10 +156,10 @@ export default class SQLiteProvider extends BaseProvider {
         // Filter results that start with the given path (extra safety check)
         // Parse JSON data and create object with id as key
         const entries = results
-            .filter((row: any) => row.path?.startsWith(pathPrefix))
-            .sort((a: any, b: any) => b.timestamp - a.timestamp)
-            .map((row: any) => {
-                const data = JSON.parse(row.data);
+            .filter((row) => isDBRow(row) && asString(row.path).startsWith(pathPrefix))
+            .sort((a, b) => asNumber(a.timestamp) - asNumber(b.timestamp))
+            .map((row) => {
+                const data = JSON.parse(asString(row.data)) as { id: string };
                 return [data.id, data];
             });
 
@@ -145,7 +170,7 @@ export default class SQLiteProvider extends BaseProvider {
         const sqlite = await this.getSQLite();
 
         const results = await sqlite.run(
-            `SELECT path, data FROM ${DB_STORE_NAME} WHERE path = ?`,
+            `SELECT data FROM ${DB_STORE_NAME} WHERE path = ?`,
             [path]
         );
 
@@ -153,7 +178,7 @@ export default class SQLiteProvider extends BaseProvider {
             throw createNoDataError();
         }
 
-        return JSON.parse(results[0].data) as T;
+        return JSON.parse(asString(results[0].data)) as T;
     }
 
     async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
@@ -167,24 +192,24 @@ export default class SQLiteProvider extends BaseProvider {
         );
 
         const [key] = Object.keys(query);
-        console.log('key', key);
         const queryValue = query[key];
 
         for (const row of results) {
-            if (!row.path?.startsWith(pathPrefix)) {
+            const rowPath = asString(row.path);
+            if (!rowPath.startsWith(pathPrefix)) {
                 continue;
             }
 
-            const data = JSON.parse(row.data);
+            const data = JSON.parse(asString(row.data)) as Record<string, string>;
 
             if (queryValue.fuzzy) {
                 if (data[key]?.includes(queryValue.fuzzy)) {
-                    yield data;
+                    yield data as T;
                 }
             }
             if (queryValue.exact) {
                 if (data[key] === queryValue.exact) {
-                    yield data;
+                    yield data as T;
                 }
             }
         }
@@ -242,7 +267,7 @@ export default class SQLiteProvider extends BaseProvider {
             throw createNoDataError();
         }
 
-        const existingData = JSON.parse(results[0].data);
+        const existingData = JSON.parse(asString(results[0].data)) as T;
 
         // Merge with existing data (deep copy to avoid reference issues)
         const newData = structuredClone({ ...existingData, ...data });
@@ -264,5 +289,3 @@ export default class SQLiteProvider extends BaseProvider {
         );
     }
 }
-
-(globalThis as any).SQLiteProvider = SQLiteProvider;

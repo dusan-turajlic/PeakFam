@@ -148,6 +148,7 @@ describe.each(testableProviders)('createProvider($0)', (providerType) => {
         const item2 = await provider.create('/collection', { name: 'Item 2', order: 2 });
         const item3 = await provider.create('/collection', { name: 'Item 3', order: 3 });
 
+
         const retrieved = await provider.getAll<{ name: string; order: number; id: string }>('/collection');
 
         expect(retrieved).toEqual(expect.objectContaining({

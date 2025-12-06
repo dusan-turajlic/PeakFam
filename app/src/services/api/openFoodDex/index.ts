@@ -13,7 +13,6 @@ export async function* searchGenerator(freeText: string): AsyncGenerator<IOpenFo
             fuzzy: freeText
         }
     })) {
-        console.log('item', item);
         yield item;
     }
 

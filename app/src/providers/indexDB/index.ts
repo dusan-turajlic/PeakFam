@@ -102,9 +102,14 @@ export default class IndexDBProvider extends BaseProvider {
         }
 
         // Filter results that start with the given path
-        return Object.fromEntries(result.filter(item => item.path.startsWith(path + '/'))
-            .sort((a, b) => b.timestamp - a.timestamp)
-            .map(item => [item.data.id, item.data])) as T[];
+        const filteredResults = result.filter(item => item.path.startsWith(path + '/'));
+
+        if (filteredResults.length === 0) {
+            throw createNoDataError();
+        }
+
+        const sortedResults = [...filteredResults].sort((a, b) => b.timestamp - a.timestamp);
+        return Object.fromEntries(sortedResults.map(item => [item.data.id, item.data])) as T[];
     }
 
     async get<T>(path: string): Promise<T> {
@@ -136,13 +141,11 @@ export default class IndexDBProvider extends BaseProvider {
             const queryValue = query[key];
             if (queryValue.fuzzy) {
                 if (data[key].includes(queryValue.fuzzy)) {
-                    console.log('fuzzy', data);
                     yield data;
                 }
             }
             if (queryValue.exact) {
                 if (data[key] === queryValue.exact) {
-                    console.log('exact', data);
                     yield data;
                 }
             }
@@ -155,7 +158,6 @@ export default class IndexDBProvider extends BaseProvider {
         const cursor = await cursorPromise;
 
         while (cursor) {
-            debugger;
             cursor?.continue();
             yield this.wrap(cursor?.request);
         }
@@ -177,7 +179,6 @@ export default class IndexDBProvider extends BaseProvider {
 
     async createMany<T>(dataArray: { path: string, data: T }[], generateId: boolean = true): Promise<void> {
         const store = await this.getStore('readwrite');
-        console.log('create', dataArray);
         for await (const item of dataArray) {
             const { fullPath, newData } = this._createRecord(item.path, item.data, generateId);
 
