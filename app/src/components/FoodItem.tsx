@@ -1,54 +1,43 @@
-import {
-    FireIcon,
-} from '@heroicons/react/20/solid'
 import type { IOpenFoodDexObject } from '@/modals'
+import { calculateCaloriesFromMacros } from '@/utils/macros'
+import { formatProductName } from '@/utils/format'
+import { FoodIcon, MacroSummary, ServingIndicator } from '@/components/ui'
 
-interface FoodItemProps extends Partial<IOpenFoodDexObject> {
-    foodIcon: string;
+interface FoodItemProps extends Readonly<Partial<IOpenFoodDexObject>> {
+    readonly foodIcon: string;
+    readonly onClick?: () => void;
 }
 
-function calculateCaloriesBasedOnMacros(macros: Partial<IOpenFoodDexObject>) {
-    if (macros?.protein === undefined || macros?.fat === undefined || macros?.carbs === undefined) {
-        return 0;
-    }
-    return macros.protein * 4 + macros.fat * 9 + macros.carbs * 4;
-}
-
-export default function FoodItem({ foodIcon, ...foodItem }: FoodItemProps) {
+/**
+ * A clickable food item card displaying name, icon, and macro summary
+ * Used in search results and food lists
+ */
+export default function FoodItem({ foodIcon, onClick, ...foodItem }: FoodItemProps) {
     const { kcal, name, brand, protein, fat, carbs } = foodItem;
-    const calories = kcal ? kcal : calculateCaloriesBasedOnMacros(foodItem);
+    const calories = kcal ?? calculateCaloriesFromMacros({ protein, fat, carbs });
+    const displayName = formatProductName(name, brand);
+
     return (
-        <div className="relative flex gap-x-4 py-6 ml-2 xl:static">
-            <img
-                alt=""
-                src={`/food/100x100/${foodIcon}-100.png`}
-                className="size-10 flex-none dark:outline dark:-outline-offset-1 dark:outline-white/10"
-            />
+        <button
+            type="button"
+            className="relative flex gap-x-4 py-6 ml-2 xl:static cursor-pointer hover:bg-white/5 transition-colors rounded-lg w-full text-left"
+            onClick={onClick}
+        >
+            <FoodIcon icon={foodIcon} size="md" />
+
             <div className="flex-auto">
-                <p className="text-sm font-semibold">{name ?? 'Unknown'} {brand ? `By ${brand}` : ''}</p>
-                <dl className="flex">
-                    <div className="flex flex-row items-center justify-center gap-x-1">
-                        <dt className="flex flex-row items-center justify-center gap-x-1">
-                            {!!(calories || calories === 0) && (
-                                <>
-                                    <span className="text-xs">{Math.round(calories)}</span>
-                                    <FireIcon aria-hidden="true" className="size-3" />
-                                </>
-                            )}
-                        </dt>
-                        <dd className="flex flex-row items-center justify-center gap-x-3">
-                            {protein !== undefined && <span className="text-xs">{`${Math.round(protein)}`.trim()}P</span>}
-                            {fat !== undefined && <span className="text-xs">{`${Math.round(fat)}`.trim()}F</span>}
-                            {carbs !== undefined && <span className="text-xs">{`${Math.round(carbs)}`.trim()}C</span>}
-                        </dd>
-                    </div>
-                    <div className="flex items-center justify-center gap-x-2 text-xs">
-                        <dt></dt>
-                        <dd>⚬</dd>
-                        <dd>Per 100g</dd>
-                    </div>
-                </dl>
+                <p className="text-sm font-semibold">{displayName}</p>
+
+                <div className="flex items-center gap-x-2">
+                    <MacroSummary
+                        calories={calories}
+                        protein={protein}
+                        fat={fat}
+                        carbs={carbs}
+                    />
+                    <ServingIndicator />
+                </div>
             </div>
-        </div >
+        </button>
     )
 }

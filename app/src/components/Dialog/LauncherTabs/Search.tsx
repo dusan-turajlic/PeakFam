@@ -4,15 +4,10 @@ import { searchGenerator } from "@/services/api/openFoodDex";
 import FoodItem from "@/components/FoodItem";
 import { getIconBasedOnCategories } from "@/services/api/openFoodDex/iconBasedOnCategorie";
 import type { IOpenFoodDexObject } from "@/modals";
-import Spinner from "@/components/Spinner";
-
-function debounceSearch<T extends (...args: any[]) => any>(func: T, wait: number) {
-    let timeout: NodeJS.Timeout;
-    return function (...args: Parameters<T>) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-    };
-}
+import { LoadingSpinner } from "@/components/ui";
+import { useSetAtom } from "jotai";
+import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
+import { debounce } from "@/utils/debounce";
 
 async function triggerSearch(
     searchQuery: string,
@@ -28,12 +23,22 @@ async function triggerSearch(
     setIsSearching(false);
 }
 
-const debouncedSearch = debounceSearch<typeof triggerSearch>(triggerSearch, 500);
+const debouncedSearch = debounce<typeof triggerSearch>(triggerSearch, 500);
 
 export default function Search() {
     const [isSearching, setIsSearching] = useState(false);
     const [results, setResults] = useState<IOpenFoodDexObject[]>([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const resultRef = useRef<HTMLOListElement>(null);
+    const setDialogState = useSetAtom(loggerDialog);
+
+    const handleFoodItemClick = (code: string) => {
+        setDialogState((prev) => ({
+            ...prev,
+            state: LoggerDialogState.FOOD_ITEM,
+            metadata: { ...prev.metadata, barcode: code }
+        }));
+    };
 
     return (
         <div className="overflow-auto">
@@ -43,25 +48,33 @@ export default function Search() {
                     onInput={(e) => {
                         if (!resultRef.current) return;
                         if (!(e.target instanceof HTMLInputElement)) return;
-                        if (e.target.value === '') {
+
+                        const value = e.target.value;
+                        setSearchQuery(value);
+
+                        if (value === '') {
                             setResults([]);
                             return;
                         }
 
                         setIsSearching(true);
-                        void debouncedSearch(e.target.value, setResults, setIsSearching);
+                        void debouncedSearch(value, setResults, setIsSearching);
                     }} />
             </div>
             <div className="relative top-0 h-[80vh] text-white mb-20 overflow-y-auto">
                 <ol ref={resultRef} className="divide-y divide-gray-100">
-                    {results.map((result) => (
+                    {searchQuery && results.map((result) => (
                         <li key={result.code}>
-                            <FoodItem foodIcon={getIconBasedOnCategories(result.categories ?? [])} {...result} />
+                            <FoodItem
+                                foodIcon={getIconBasedOnCategories(result.categories ?? [])}
+                                onClick={() => handleFoodItemClick(result.code)}
+                                {...result}
+                            />
                         </li>
                     ))}
-                    {isSearching && (
-                        <li className="text-gray-400 flex justify-center items-center h-full">
-                            <Spinner show={isSearching} />
+                    {searchQuery && isSearching && (
+                        <li className="text-gray-400 flex justify-center items-center h-full py-8">
+                            <LoadingSpinner show={isSearching} />
                         </li>
                     )}
                 </ol>

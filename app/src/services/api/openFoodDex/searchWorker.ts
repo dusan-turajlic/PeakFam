@@ -2,7 +2,7 @@ import type { IOpenFoodDexObject } from "@/modals";
 import createProvider from "@/providers";
 import { DB_NAME, DB_VERSION } from ".";
 
-const provider = createProvider("indexDB", DB_NAME, DB_VERSION); // create once
+const provider = createProvider("sqlite", DB_NAME, DB_VERSION); // create once
 
 self.addEventListener("message", async (e: MessageEvent<{ type: "search"; freeText: string }>) => {
     const { freeText } = e.data;

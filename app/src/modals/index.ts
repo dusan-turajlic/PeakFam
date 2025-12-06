@@ -40,39 +40,31 @@ export interface Nutriment {
     [key: string]: number | string | undefined;
 }
 
+export interface MacroValues {
+    energy_kcal?: number | null;
+    energy_kj?: number | null;
+    carbohydrates?: number | null;
+    fat?: number | null;
+    proteins?: number | null;
+    sugars?: number | null;
+    fiber?: number | null;
+    salt?: number | null;
+}
+
 export interface Product {
     code: string;
     product_name?: string;
-    product_name_en?: string;
     brands?: string;
-    quantity?: string;
-    packaging?: string;
-    categories?: string;
-    labels?: string;
+    main_category?: string;
+    macros?: {
+        serving_size?: number | null;
+        serving_quantity?: number | null;
+        serving_unit?: string | null;
+        serving?: MacroValues;
+        per100g?: MacroValues;
+    };
     image_url?: string;
-    image_small_url?: string;
-    image_thumb_url?: string;
-    ingredients_text?: string;
-    ingredients_text_en?: string;
-    nutriments?: {
-        energy_100g?: number;
-        energy_unit?: string;
-        fat_100g?: number;
-        fat_unit?: string;
-        "saturated-fat_100g"?: number;
-        "sugars_100g"?: number;
-        salt_100g?: number;
-        [key: string]: number | string | undefined;
-    };
-    nutrition_grades?: string;
-    nutriscore_data?: {
-        // optional, when included
-        energy_points?: number;
-        sugars_points?: number;
-        // etc
-        [key: string]: any;
-    };
-    [key: string]: any;  // to allow for other fields not explicitly listed
+    [key: string]: any;
 }
 
 export interface ProductResponse {

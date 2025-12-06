@@ -5,14 +5,15 @@ import createProvider from "@/providers";
 export const DB_NAME = "OPEN_FOOD_DEX_DB";
 export const DB_VERSION = 1;
 
-const provider = createProvider("indexDB", DB_NAME, DB_VERSION); // create once
+const provider = createProvider("sqlite", DB_NAME, DB_VERSION); // create once
 
 export async function* searchGenerator(freeText: string): AsyncGenerator<IOpenFoodDexObject> {
-    for await (const item of await provider.search<IOpenFoodDexObject>(`name-${freeText}`, {
+    for await (const item of provider.search<IOpenFoodDexObject>('/products', {
         name: {
             fuzzy: freeText
         }
     })) {
+        console.log('item', item);
         yield item;
     }
 

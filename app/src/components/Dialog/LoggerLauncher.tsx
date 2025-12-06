@@ -1,22 +1,17 @@
 import { Button, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import { useAtom } from "jotai"
-import { MagnifyingGlassIcon, QrCodeIcon, SquaresPlusIcon, XMarkIcon } from "@heroicons/react/24/outline"
+import { XMarkIcon } from "@heroicons/react/24/outline"
 import { loggerDialog } from "@/atoms/loggerDialog"
 import { Fragment, useState } from "react"
 import LauncherTabs from "./LauncherTabs"
-
-const tabs = [
-    { name: 'Scan', key: 'scan', icon: QrCodeIcon, current: false },
-    { name: 'Search', key: 'search', icon: MagnifyingGlassIcon, current: false },
-    // { name: 'AI', icon: ChatBubbleBottomCenterTextIcon, current: false },
-    { name: 'Quick Add', key: 'quick-add', icon: SquaresPlusIcon, current: false }
-]
+import { LAUNCHER_TABS, DEFAULT_TAB_INDEX } from "@/constants/tabs"
 
 export default function LoggerLauncher() {
     const [state, setState] = useAtom(loggerDialog)
     const { metadata } = state
-    const tabIndex = tabs.findIndex(tab => tab.key === metadata?.tab)
-    const [selectedIndex, setSelectedIndex] = useState(tabIndex === -1 ? 1 : tabIndex)
+    const tabIndex = LAUNCHER_TABS.findIndex(tab => tab.key === metadata?.tab)
+    const [selectedIndex, setSelectedIndex] = useState(tabIndex === -1 ? DEFAULT_TAB_INDEX : tabIndex)
+    
     return (
         <>
             <div className="h-3"></div>
@@ -27,7 +22,7 @@ export default function LoggerLauncher() {
             </Button>
             <TabGroup selectedIndex={selectedIndex}>
                 <TabList className="flex w-auto space-x-2 text-white border-b border-gray-500 flex nowrap overflow-x-auto px-2 relative">
-                    {tabs.map((tab, index) => (
+                    {LAUNCHER_TABS.map((tab, index) => (
                         <Tab as={Fragment} key={tab.name}>
                             {({ selected }) => (
                                 <Button onClick={() => setSelectedIndex(index)} className={[
@@ -47,7 +42,7 @@ export default function LoggerLauncher() {
                     ))}
                 </TabList>
                 <TabPanels className="mt-2 mx-4 max-h-full overflow-y-auto">
-                    {tabs.map((tab) => (
+                    {LAUNCHER_TABS.map((tab) => (
                         <TabPanel key={tab.key}>
                             {LauncherTabs(tab.key)}
                         </TabPanel>

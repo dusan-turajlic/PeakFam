@@ -1,4 +1,4 @@
-import BaseProvider, { type IBaseSearchQuary } from "../base";
+import BaseProvider, { type IBaseSearchQuary, type ProviderOptions } from "../base";
 import { v4 as uuidv4 } from 'uuid';
 import storage from '@/providers/localstorage/storage';
 
@@ -13,10 +13,17 @@ function handlePath(path: string) {
 
 export default class LocalStorageProvider extends BaseProvider {
     store = storage;
+    private readonly options: ProviderOptions | undefined;
 
-    constructor(dbName?: string, dbVersion?: number) {
+    constructor(dbName?: string, dbVersion?: number, options?: ProviderOptions) {
         super(dbName ?? STORE_ROOT, dbVersion ?? STORE_VERSION);
+        // Options stored for future extensibility - always check if fields exist before using
+        this.options = options;
+    }
 
+    // Expose options getter for potential future use
+    protected getOptions(): ProviderOptions | undefined {
+        return this.options;
     }
 
     private _getRoot() {
@@ -38,16 +45,22 @@ export default class LocalStorageProvider extends BaseProvider {
             const root = this._getRoot();
             const keys = handlePath(path);
 
-            try {
-                let current = root;
-                for (const key of keys) {
-                    current = current[key];
+            let current = root;
+            for (const key of keys) {
+                if (!current?.[key]) {
+                    reject(createNoDataError());
+                    return;
                 }
-
-                resolve(current as T[]);
-            } catch (error) {
-                reject(error);
+                current = current[key];
             }
+
+            if (!current || typeof current !== 'object') {
+                reject(createNoDataError());
+                return;
+            }
+
+            // Return all items in the collection
+            resolve(Object.values(current) as T[]);
         });
     }
 
@@ -58,19 +71,14 @@ export default class LocalStorageProvider extends BaseProvider {
 
             let current = root;
             for (const key of keys) {
-                if (!current[key]) {
+                if (!current?.[key]) {
                     reject(createNoDataError());
-                    break;
+                    return;
                 }
-
                 current = current[key];
             }
 
-            if (current) {
-                resolve(current as T);
-            } else {
-                reject(createNoDataError());
-            }
+            resolve(current as T);
         });
     }
 

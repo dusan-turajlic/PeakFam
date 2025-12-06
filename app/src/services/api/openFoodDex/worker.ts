@@ -15,7 +15,7 @@ interface IOpenFoodDexObjectWithPath {
     data: IOpenFoodDexObject;
 }
 
-const provider = createProvider("indexDB", DB_NAME, DB_VERSION); // create once
+const provider = createProvider("sqlite", DB_NAME, DB_VERSION); // create once
 
 self.addEventListener("message", (e: MessageEvent<Msg>) => {
     console.log("worker onmessage", e.data);
@@ -93,8 +93,9 @@ function linesToObjects() {
                     fat,
                     protein
                 ] = JSON.parse(line) as IOpenFoodDexArray;
+
                 // The object code should always be defined
-                let path = `/products/name-${name}-brand-${brand}-code-${code}`;
+                const path = `/products/name-${name}-brand-${brand}-code-${code}`;
                 const obj: IOpenFoodDexObject = {
                     code: code ?? "",
                     name: name ?? "",

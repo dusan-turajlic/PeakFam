@@ -1,4 +1,4 @@
-import BaseProvider, { type IBaseSearchQuary } from "@/providers/base";
+import BaseProvider, { type IBaseSearchQuary, type ProviderOptions } from "@/providers/base";
 import { v4 as uuidv4 } from 'uuid';
 import IndexDB from '@/providers/indexDB/db';
 
@@ -11,10 +11,18 @@ const createNoDataError = () => new Error('No Data Found');
 export default class IndexDBProvider extends BaseProvider {
     private db: IDBDatabase | null = null;
     private dbPromise: Promise<IDBDatabase> | null = null;
+    private readonly options: ProviderOptions | undefined;
 
-    constructor(dbName?: string, dbVersion?: number) {
+    constructor(dbName?: string, dbVersion?: number, options?: ProviderOptions) {
         super(dbName ?? DB_NAME, dbVersion ?? DB_VERSION);
+        // Options stored for future extensibility - always check if fields exist before using
+        this.options = options;
         this.initDB();
+    }
+
+    // Expose options getter for potential future use
+    protected getOptions(): ProviderOptions | undefined {
+        return this.options;
     }
 
     private initDB(): Promise<IDBDatabase> {
@@ -40,7 +48,7 @@ export default class IndexDBProvider extends BaseProvider {
                 // Create object store if it doesn't exist
                 if (!db.objectStoreNames.contains(DB_STORE_NAME)) {
                     const store = db.createObjectStore(DB_STORE_NAME, { keyPath: 'path' });
-                    store.createIndex('path', 'path', { unique: true });
+                    store.createIndex('path', 'path', { unique: true, multiEntry: true });
                 }
             };
         });
@@ -101,12 +109,14 @@ export default class IndexDBProvider extends BaseProvider {
 
     async get<T>(path: string): Promise<T> {
         const store = await this.getStore('readonly');
-        const lookForPath = await this.wrap(store.get(path));
-        if (!lookForPath || !lookForPath.path.startsWith(path + '/')) {
+
+        const result = await this.wrap(store.get(path));
+
+        if (!result || !result.data) {
             throw createNoDataError();
         }
 
-        return lookForPath.data as T;
+        return result.data as T;
     }
 
     async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
@@ -167,7 +177,7 @@ export default class IndexDBProvider extends BaseProvider {
 
     async createMany<T>(dataArray: { path: string, data: T }[], generateId: boolean = true): Promise<void> {
         const store = await this.getStore('readwrite');
-
+        console.log('create', dataArray);
         for await (const item of dataArray) {
             const { fullPath, newData } = this._createRecord(item.path, item.data, generateId);
 

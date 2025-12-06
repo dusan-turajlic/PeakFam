@@ -5,6 +5,19 @@ export interface IBaseSearchQuary {
     };
 }
 
+/**
+ * Generic provider options interface.
+ * All fields are optional - each provider should check if a field exists before using it.
+ * This allows a single options object to work with any provider type.
+ */
+export interface ProviderOptions {
+    // SQLite provider options
+    wasmUrl?: string;
+
+    // Future options for other providers can be added here
+    // All fields should remain optional
+}
+
 export default abstract class BaseProvider {
     dbName: string;
     dbVersion: number;

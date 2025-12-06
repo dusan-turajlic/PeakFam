@@ -2,28 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import DayButton from "./DayButton";
 import useEmblaCarousel from 'embla-carousel-react'
 import { dateTimeStartOfDay, type DateStartOfDay } from "@/utils/browser";
-
-const addDays = (base: DateStartOfDay, delta: number): DateStartOfDay => {
-    const d = new Date(base.date);
-    d.setDate(d.getDate() + delta);
-    return dateTimeStartOfDay(d);
-};
-
-const makeWeekAfter = (start: DateStartOfDay): DateStartOfDay[] => Array.from({ length: 7 }, (_, i) => addDays(start, i));
-const makeWeekBefore = (start: DateStartOfDay): DateStartOfDay[] => Array.from({ length: 7 }, (_, i) => addDays(start, -(i + 1))).reverse();
-
-function getWeekAfter(week: DateStartOfDay[]) {
-    const last = week[week.length - 1];
-    const start = addDays(last, 1);
-    return makeWeekAfter(start);
-};
-
-function getWeekBefore(week: DateStartOfDay[]) {
-    const first = week[0];
-    const start = addDays(first, -7);
-    return makeWeekBefore(start);
-};
-
+import { addDays, makeWeekAfter, getWeekAfter, getWeekBefore } from "@/utils/date";
 
 function WeekDaySelector() {
     const shouldAppendRef = useRef<string | null>(null);

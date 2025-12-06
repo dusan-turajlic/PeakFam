@@ -4,38 +4,70 @@ PeakFam is an open-source macro and calorie tracking application built with mode
 
 ## Features
 
-- **Calorie Tracking**: Easy-to-use interface for tracking daily calorie consumption
-- **Macro Tracking**: Monitor protein, carbohydrates, and fat intake
-- **Modern UI**: Clean, responsive design built with Tailwind CSS
-- **State Management**: Efficient state management using Jotai
-- **Type Safety**: Full TypeScript support for better development experience
+- **Calorie & Macro Tracking**: Track daily calories, protein, carbohydrates, and fat intake
+- **Food Database**: Search through thousands of food items via OpenFoodDex
+- **Barcode Scanner**: Quickly add foods by scanning product barcodes
+- **Quick Add**: Manually enter macros when food isn't in the database
+- **Time-based Logging**: Organize food intake by hour throughout the day
+- **Offline-First**: Local SQLite database for fast, offline search
 
 ## Tech Stack
 
-- **Frontend**: React 19 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **State Management**: Jotai
-- **Testing**: 
-  - Unit/Integration: Vitest with React Testing Library
-  - E2E: Playwright
-- **Code Quality**: ESLint + Prettier
-- **Package Manager**: npm
+| Category | Technology |
+|----------|------------|
+| **Framework** | React 19 + TypeScript |
+| **Build Tool** | Vite |
+| **Styling** | Tailwind CSS |
+| **State** | Jotai |
+| **Storage** | SQLite WASM (primary), IndexedDB, LocalStorage |
+| **Testing** | Vitest, React Testing Library, Playwright |
+| **Code Quality** | ESLint + Prettier |
+
+## Architecture Overview
+
+PeakFam follows a **layered MVC-inspired architecture**:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Views (src/views/)        │  Page-level components    │
+├─────────────────────────────────────────────────────────┤
+│  Components (src/components/) │  Reusable UI blocks    │
+├─────────────────────────────────────────────────────────┤
+│  Atoms (src/atoms/)        │  Global state (Jotai)     │
+├─────────────────────────────────────────────────────────┤
+│  Services (src/services/)  │  Business logic & APIs    │
+├─────────────────────────────────────────────────────────┤
+│  Providers (src/providers/)│  Storage abstraction      │
+├─────────────────────────────────────────────────────────┤
+│  Models (src/modals/)      │  TypeScript interfaces    │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Key Principle**: Each layer only communicates with adjacent layers. Components use services, services use providers—never skip layers.
+
+> 📖 **For detailed architecture documentation and coding guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md)**
 
 ## Project Structure
 
 ```
 PeakFam/
-├── README.md          # This file
-├── app/               # React application
-│   ├── src/           # Source code
-│   ├── public/        # Static assets
-│   ├── package.json   # App dependencies
-│   └── ...           # App configuration files
-└── e2e/              # End-to-end tests
-    ├── tests/         # Playwright test files
-    ├── package.json   # E2E dependencies
-    └── ...           # E2E configuration files
+├── README.md              # This file
+├── CONTRIBUTING.md        # Developer guide & architecture docs
+├── LICENSE                # GPLv3 license
+├── app/                   # React application
+│   ├── src/
+│   │   ├── atoms/         # Jotai state atoms
+│   │   ├── components/    # Reusable UI components
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── modals/        # TypeScript interfaces
+│   │   ├── providers/     # Storage layer (SQLite, IndexedDB)
+│   │   ├── services/      # Business logic & APIs
+│   │   ├── utils/         # Utility functions
+│   │   ├── views/         # Page components
+│   │   └── App.tsx        # Root component
+│   ├── public/            # Static assets
+│   └── package.json       # App dependencies
+└── e2e/                   # End-to-end tests (Playwright)
 ```
 
 ## Development Setup
@@ -127,33 +159,34 @@ cd e2e
 
 ## Contributing
 
+We welcome contributions! Here's how to get started:
+
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Make your changes
-4. Run tests to ensure everything works:
-   ```bash
-   # In app directory
-   npm run test
-   npm run lint
-   
-   # In e2e directory
-   npm run test
-   ```
+3. Make your changes following our architecture guidelines
+4. Run tests: `npm run test && npm run lint`
 5. Commit your changes: `git commit -m 'Add your feature'`
-6. Push to the branch: `git push origin feature/your-feature-name`
-7. Submit a pull request
+6. Push and submit a pull request
 
-## Testing Strategy
+> 📖 **Before contributing, please read [CONTRIBUTING.md](./CONTRIBUTING.md)** for:
+> - Detailed architecture documentation
+> - Code organization guidelines (MVC pattern)
+> - DRY principles and best practices
+> - Layer responsibilities (Services vs Providers vs Components)
+> - Testing strategy
 
-- **Unit Tests**: Test individual components and functions using Vitest
-- **Integration Tests**: Test component interactions and state management
-- **E2E Tests**: Test complete user workflows using Playwright
+## Code Architecture Summary
 
-## Code Style
+| Layer | Responsibility | Example |
+|-------|---------------|---------|
+| **Views** | Page composition | `Tracker.tsx` |
+| **Components** | UI + user interaction | `FoodItem.tsx`, `DiaryTracker.tsx` |
+| **Atoms** | Global state | `loggerDialog.ts` |
+| **Services** | Business logic, API calls | `openFoodDex/index.ts` |
+| **Providers** | Storage operations | `sqlite/index.ts` |
+| **Models** | TypeScript interfaces | `IOpenFoodDexObject` |
 
-- **ESLint**: Enforces code quality and consistency
-- **Prettier**: Ensures consistent code formatting
-- **TypeScript**: Provides type safety and better developer experience
+**Golden Rule**: Components call Services → Services call Providers → Providers handle storage
 
 ## License
 This project is licensed under the GNU General Public License v3.0 (GPLv3) - see the [LICENSE](./LICENSE) file for details.

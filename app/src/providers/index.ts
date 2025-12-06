@@ -1,26 +1,36 @@
-import BaseProvider from "@/providers/base";
+import BaseProvider, { type ProviderOptions } from "@/providers/base";
 import IndexDBProvider from "@/providers/indexDB";
 import LocalStorageProvider from "@/providers/localstorage";
+import SQLiteProvider from "@/providers/sqlite";
 
-const ACTIVE_PROVIDERS: Record<string, BaseProvider> = {}
+export type ProviderType = 'local' | 'indexDB' | 'sqlite';
 
-export type ProviderType = 'local' | 'indexDB';
-
-export default function createProvider(provider: ProviderType = 'indexDB', dbName?: string, dbVersion?: number) {
-    if (ACTIVE_PROVIDERS[provider]) {
-        return ACTIVE_PROVIDERS[provider];
-    }
-
+export default function createProvider(
+    provider: ProviderType = 'indexDB',
+    dbName?: string,
+    dbVersion?: number,
+    options?: ProviderOptions
+): BaseProvider {
     switch (provider) {
         case 'local':
-            // @ts-ignore
-            ACTIVE_PROVIDERS.local = globalThis.localStorageProvider = new LocalStorageProvider(dbName, dbVersion);
-            return ACTIVE_PROVIDERS.local;
+            return new LocalStorageProvider(
+                dbName,
+                dbVersion,
+                options
+            );
         case 'indexDB':
-            // @ts-ignore
-            ACTIVE_PROVIDERS.indexDB = globalThis.indexDBProvider = new IndexDBProvider(dbName, dbVersion);
-            return ACTIVE_PROVIDERS.indexDB;
+            return new IndexDBProvider(
+                dbName,
+                dbVersion,
+                options
+            );
+        case 'sqlite':
+            return new SQLiteProvider(
+                dbName,
+                dbVersion,
+                options
+            );
         default:
-            return ACTIVE_PROVIDERS.local;
+            throw new Error(`Unsupported provider: ${provider}`);
     }
 }
