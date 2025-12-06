@@ -79,8 +79,5 @@ jobs:
       - name: Start preview server
         run: npm run preview -- --port 4173 --host &
 
-      - name: Wait for server to be ready
-        run: npx wait-on --timeout 30000 http://localhost:4173
-
       - name: Run Vitest E2E tests
         run: npm run test:e2e -- --run
