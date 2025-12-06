@@ -74,5 +74,14 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install chromium --with-deps
 
+      - name: Build application
+        run: npm run build
+
+      - name: Start preview server
+        run: npm run preview &
+
+      - name: Wait for server to be ready
+        run: npx wait-on --timeout 30000 http://localhost:4173
+
       - name: Run Vitest E2E tests
-        run: npm run test:e2e
+        run: npm run test:e2e -- --run
