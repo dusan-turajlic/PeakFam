@@ -2,7 +2,8 @@
  * Creates a debounced version of a function that delays execution
  * until after `wait` milliseconds have elapsed since the last call.
  */
-export function debounce<T extends (...args: unknown[]) => unknown>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function debounce<T extends (...args: any[]) => any>(
     func: T,
     wait: number
 ): (...args: Parameters<T>) => void {
