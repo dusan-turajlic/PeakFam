@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
+import { createElement } from 'react';
+import '@/index.css';
 
 const preview: Preview = {
   parameters: {
@@ -15,7 +17,20 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
+
+    backgrounds: {
+      default: 'dark',
+      values: [
+        { name: 'dark', value: '#201b12' },
+        { name: 'light', value: '#ffffff' },
+      ],
+    },
   },
+
+  decorators: [
+    (Story) => createElement('div', { className: 'dark' }, createElement(Story)),
+  ],
 };
 
 export default preview;
+
