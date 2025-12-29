@@ -2,7 +2,6 @@
 export { DayButton } from './components/dayButton';
 export { FoodCard } from './components/foodCard';
 export { IconButton } from './components/iconButton';
-export { MacroProgress } from './components/macroProgress';
 export { ProgressIndicator } from './components/progressIndicator';
 export { useRipple } from './components/rippleEffect';
 export { SearchInput } from './components/searchInput';
