@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ProgressIndicator } from '@/components/pillButton';
+import { ProgressIndicator } from '@/components/progressIndicator';
 
 const meta = {
     title: 'Components/ProgressIndicator',

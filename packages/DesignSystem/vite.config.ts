@@ -1,27 +1,61 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
 
 // https://vite.dev/config/
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
-const dirname =
-  typeof __dirname !== 'undefined'
-    ? __dirname
-    : path.dirname(fileURLToPath(import.meta.url));
+const dirname = __dirname ?? path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts({
+      tsconfigPath: './tsconfig.app.json',
+      include: ['src'],
+      exclude: ['src/stories', 'src/App.tsx', 'src/main.tsx'],
+      insertTypesEntry: true,
+      pathsToAliases: false,
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(dirname, 'src'),
     },
   },
+  build: {
+    lib: {
+      entry: path.resolve(dirname, 'src/index.ts'),
+      formats: ['es'],
+      fileName: 'index',
+    },
+    rollupOptions: {
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'framer-motion',
+        'lucide-react',
+        'class-variance-authority',
+        'clsx',
+        'tailwind-merge',
+      ],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
+    },
+  },
   test: {
+    globals: true,
     projects: [
+      // Storybook tests
       {
         extends: true,
         plugins: [
@@ -44,6 +78,16 @@ export default defineConfig({
             ],
           },
           setupFiles: ['.storybook/vitest.setup.ts'],
+        },
+      },
+      // Component unit tests (jsdom)
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          include: ['src/**/*.spec.{ts,tsx}'],
+          environment: 'jsdom',
+          setupFiles: ['./src/test/setup.ts'],
         },
       },
     ],
