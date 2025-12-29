@@ -1,45 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+/* Import design system theme (includes Tailwind) */
+@import "@peakfam/design-system/styles";
 
-@import 'tailwindcss';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* CSS Variables for Design System */
-:root {
-    /* Brand Colors */
-    --color-brand-gold: #E4B962;
-    
-    /* Surface Colors */
-    --color-surface-base: #201B12;
-    --color-surface-card: #2D281E;
-    --color-surface-elevated: #3D3828;
-    
-    /* Typography Colors */
-    --color-text-primary: #FFFFFF;
-    --color-text-secondary: #9CA3AF; /* gray-400 */
-}
-
-/* Base Styles */
-html {
-    font-family: 'Manrope', system-ui, sans-serif;
-}
-
-body {
-    background-color: var(--color-surface-base);
-    color: var(--color-text-primary);
-}
-
-/* Hide scrollbar but keep functionality */
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-    /* Safari and Chrome */
-}
+/* Scan design system components for Tailwind classes */
+@source "../node_modules/@peakfam/design-system/src/**/*.tsx";

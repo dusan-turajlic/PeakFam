@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter @peakfam/food-tracker dev",
-    "build": "pnpm --filter @peakfam/food-tracker build",
+    "build": "pnpm --filter @peakfam/food-tracker... build",
     "storybook": "pnpm --filter @peakfam/design-system storybook",
     "test": "pnpm -r test",
     "lint": "eslint packages/",
@@ -26,4 +26,3 @@
   },
   "packageManager": "pnpm@10.0.0"
 }
-
