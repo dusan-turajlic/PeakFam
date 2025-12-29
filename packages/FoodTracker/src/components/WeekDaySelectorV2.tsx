@@ -83,11 +83,11 @@ function WeekDaySelector() {
             <div ref={emblaRef} className="bg-surface-base overflow-hidden">
                 <div className="flex">
                     {weeks.map((week) => (
-                        <div key={week.map(({ uuid }) => uuid).join('-')} className="embla__container w-full flex justify-center items-center gap-1 p-4">
+                        <div key={week.map(({ uuid }) => uuid).join('-')} className="embla__container w-full flex justify-center items-center gap-1 px-4">
                             {week.map((dates: DateStartOfDay) => {
                                 const day = dates.date.toLocaleDateString(USER_LOCAL_LANGUAGE, { weekday: 'short' });
                                 const date = dates.date.getDate();
-                                return <DayButton key={dates.uuid} day={day.toUpperCase()} date={date} active={dates.uuid === selectedDate.uuid} onClick={() => setSelectedDate(dates)} progress={Math.random() * 100} />
+                                return <DayButton key={dates.uuid} day={day.toUpperCase()} date={date} active={dates.uuid === selectedDate.uuid} onClick={() => setSelectedDate(dates)} />
                             })}
                         </div>
                     ))}
