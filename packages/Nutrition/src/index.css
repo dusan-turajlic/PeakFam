@@ -1,5 +1,5 @@
 /* Import design system theme (includes Tailwind) */
-@import "@peakfam/design-system/styles";
+@import "@ydin/design-system/styles";
 
 /* Scan design system components for Tailwind classes */
-@source "../node_modules/@peakfam/design-system/src/**/*.tsx";
+@source "../node_modules/@ydin/design-system/src/**/*.tsx";

@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from "react";
-import { FoodCard } from "@peakfam/design-system";
+import { FoodCard } from "@ydin/design-system";
 import { search } from "@/services/api/openFoodDex";
 import type { IOpenFoodDexObject } from "@/modals";
 import { formatProductName } from "@/utils/format";
 import { calculateCaloriesFromMacros } from "@/utils/macros";
 import { LoadingSpinner } from "@/components/ui";
-import { Search, SearchX } from "@peakfam/design-system/icons";
+import { Search, SearchX } from "@ydin/design-system/icons";
 
 interface SearchResultsProps {
     query: string;

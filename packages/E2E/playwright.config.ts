@@ -64,7 +64,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'cd ../app && npm run dev',
+    command: 'cd ../Nutrition && pnpm dev',
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
   },

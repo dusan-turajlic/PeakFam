@@ -5,7 +5,7 @@ import {
     LayoutDashboard,
     Scale,
     Flame
-} from "@peakfam/design-system/icons";
+} from "@ydin/design-system/icons";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 

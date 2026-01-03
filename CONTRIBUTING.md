@@ -1,6 +1,6 @@
-# Contributing to PeakFam
+# Contributing to Ydin
 
-Welcome to PeakFam! This guide will help you understand the codebase architecture and get you up to speed quickly so you can start contributing effectively.
+Welcome to Ydin! This guide will help you understand the codebase architecture and get you up to speed quickly so you can start contributing effectively.
 
 ## Table of Contents
 
@@ -28,7 +28,7 @@ Welcome to PeakFam! This guide will help you understand the codebase architectur
 ```bash
 # 1. Clone and install
 git clone <repository-url>
-cd PeakFam/app
+cd Ydin/app
 npm install
 
 # 2. Start development server
@@ -44,7 +44,7 @@ The app runs at `http://localhost:5173` by default.
 
 ## Architecture Overview
 
-PeakFam follows a **layered architecture** inspired by the MVC pattern, adapted for React:
+Ydin follows a **layered architecture** inspired by the MVC pattern, adapted for React:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐

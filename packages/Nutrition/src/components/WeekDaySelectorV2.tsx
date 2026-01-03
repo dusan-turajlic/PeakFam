@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { DayButton } from "@peakfam/design-system";
+import { DayButton } from "@ydin/design-system";
 import useEmblaCarousel from 'embla-carousel-react'
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE, type DateStartOfDay } from "@/utils/browser";
 import { addDays, makeWeekAfter, getWeekAfter, getWeekBefore } from "@/utils/date";

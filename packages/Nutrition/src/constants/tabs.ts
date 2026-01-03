@@ -1,4 +1,4 @@
-import { ScanBarcode, Search, LayoutGrid, type LucideIcon } from "@peakfam/design-system/icons";
+import { ScanBarcode, Search, LayoutGrid, type LucideIcon } from "@ydin/design-system/icons";
 
 export interface TabConfig {
     name: string;

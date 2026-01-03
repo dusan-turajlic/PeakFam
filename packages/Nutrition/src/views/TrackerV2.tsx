@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ModalSheet, ModalSheetPeek, ModalSheetContent, SearchInput, TabGroup, TabButton, Button } from "@peakfam/design-system";
-import { Scan, ScanBarcode, Search } from "@peakfam/design-system/icons";
+import { ModalSheet, ModalSheetPeek, ModalSheetContent, SearchInput, TabGroup, TabButton, Button } from "@ydin/design-system";
+import { Scan, ScanBarcode, Search } from "@ydin/design-system/icons";
 import WeekDaySelectorV2 from "@/components/WeekDaySelectorV2";
 import TopNavigation from "@/components/TopNavigation";
 import DiaryTrackerV2 from "@/components/DiaryTrackerV2";

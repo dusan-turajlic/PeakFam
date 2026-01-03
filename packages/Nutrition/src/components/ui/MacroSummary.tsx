@@ -1,4 +1,4 @@
-import { Flame } from '@peakfam/design-system/icons';
+import { Flame } from '@ydin/design-system/icons';
 import { formatMacroValue } from '@/utils/format';
 
 interface MacroSummaryProps {

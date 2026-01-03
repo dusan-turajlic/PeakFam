@@ -1,6 +1,6 @@
 import { Button, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import { useAtom } from "jotai"
-import { X } from "@peakfam/design-system/icons"
+import { X } from "@ydin/design-system/icons"
 import { loggerDialog } from "@/atoms/loggerDialog"
 import { Fragment, useState } from "react"
 import LauncherTabs from "./LauncherTabs"

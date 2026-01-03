@@ -1,11 +1,11 @@
 {
-  "name": "peakfam",
+  "name": "ydin",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter @peakfam/food-tracker dev",
-    "build": "pnpm --filter @peakfam/food-tracker... build",
-    "storybook": "pnpm --filter @peakfam/design-system storybook",
+    "dev": "pnpm --filter @ydin/nutrition dev",
+    "build": "pnpm --filter @ydin/nutrition... build",
+    "storybook": "pnpm --filter @ydin/design-system storybook",
     "test": "pnpm -r test",
     "lint": "eslint packages/",
     "lint:fix": "eslint packages/ --fix",

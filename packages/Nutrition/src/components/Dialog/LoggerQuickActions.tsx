@@ -1,6 +1,6 @@
 import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import { Button, DialogTitle } from "@headlessui/react";
-import { ScanBarcode, LayoutGrid } from "@peakfam/design-system/icons";
+import { ScanBarcode, LayoutGrid } from "@ydin/design-system/icons";
 import { useAtom } from "jotai";
 
 export default function LoggerQuickActions() {
