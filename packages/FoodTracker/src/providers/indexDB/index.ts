@@ -124,43 +124,43 @@ export default class IndexDBProvider extends BaseProvider {
         return result.data as T;
     }
 
-    async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
+    async search<T>(path: string, query: IBaseSearchQuary): Promise<T[]> {
         const store = await this.getStore('readonly');
         const index = store.index('path');
 
         const range = IDBKeyRange.bound(path, path + '\uffff', true, true);
+        const matches: T[] = [];
 
-        for await (const cursorPromise of this._iterateCursor(index, range)) {
-            const cursor = await cursorPromise;
-            if (!cursor) {
-                break;
-            }
+        return new Promise((resolve, reject) => {
+            const request = index.openCursor(range);
 
-            const data = cursor.value.data;
-            const [key] = Object.keys(query);
-            const queryValue = query[key];
-            if (queryValue.fuzzy) {
-                if (data[key].includes(queryValue.fuzzy)) {
-                    yield data;
+            request.onerror = () => reject(request.error);
+
+            request.onsuccess = () => {
+                const cursor = request.result;
+                if (!cursor) {
+                    resolve(matches);
+                    return;
                 }
-            }
-            if (queryValue.exact) {
-                if (data[key] === queryValue.exact) {
-                    yield data;
+
+                const data = cursor.value.data;
+                const [key] = Object.keys(query);
+                const queryValue = query[key];
+
+                if (queryValue.fuzzy) {
+                    if (data[key].includes(queryValue.fuzzy)) {
+                        matches.push(data);
+                    }
                 }
-            }
-        }
-    }
+                if (queryValue.exact) {
+                    if (data[key] === queryValue.exact) {
+                        matches.push(data);
+                    }
+                }
 
-    private async *_iterateCursor(source: IDBObjectStore | IDBIndex, range: IDBKeyRange | null) {
-        const cursorPromise = this.wrap(source.openCursor(range));
-        yield cursorPromise;
-        const cursor = await cursorPromise;
-
-        while (cursor) {
-            cursor?.continue();
-            yield this.wrap(cursor?.request);
-        }
+                cursor.continue();
+            };
+        });
     }
 
     async create<T>(path: string, data: T, generateId: boolean = true) {

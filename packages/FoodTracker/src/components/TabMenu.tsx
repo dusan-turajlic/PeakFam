@@ -1,11 +1,11 @@
 import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import {
-    PlusIcon,
-    EllipsisHorizontalCircleIcon,
-    RectangleGroupIcon,
-    ScaleIcon,
-    FireIcon
-} from "@heroicons/react/24/outline";
+    Plus,
+    MoreHorizontal,
+    LayoutDashboard,
+    Scale,
+    Flame
+} from "@peakfam/design-system/icons";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 
@@ -20,7 +20,7 @@ export default function TabMenu() {
                         <li>
                             <Link to="/" className="ui-selected:text-white ui-not-selected:text-gray-400 focus:outline-none">
                                 <div className="flex flex-col items-center gap-1">
-                                    <RectangleGroupIcon className="h-7 w-7" aria-hidden="true" />
+                                    <LayoutDashboard className="h-7 w-7" aria-hidden="true" />
                                     <span>Dashboard</span>
                                 </div>
                             </Link>
@@ -29,7 +29,7 @@ export default function TabMenu() {
                         <li>
                             <Link to="/" className="ui-selected:text-white ui-not-selected:text-gray-400 focus:outline-none">
                                 <div className="flex flex-col items-center gap-1">
-                                    <FireIcon className="h-7 w-7" aria-hidden="true" />
+                                    <Flame className="h-7 w-7" aria-hidden="true" />
                                     <span>Food Log</span>
                                 </div>
                             </Link>
@@ -37,14 +37,14 @@ export default function TabMenu() {
 
                         <li>
                             <button type="button" onClick={() => setState({ ...state, open: true, state: LoggerDialogState.DEFAULT })} className="block -mt-8 rounded-full bg-brand-gold w-16 h-16 flex items-center justify-center m-auto shadow-lg ring-1 ring-brand-gold/50 hover:ring-brand-gold transition-all">
-                                <PlusIcon className="h-8 w-8 text-surface-base" aria-hidden="true" />
+                                <Plus className="h-8 w-8 text-surface-base" aria-hidden="true" />
                             </button>
                         </li>
 
                         <li>
                             <Link to="/" className="ui-selected:text-white ui-not-selected:text-gray-400 focus:outline-none">
                                 <div className="flex flex-col items-center gap-1">
-                                    <ScaleIcon className="h-7 w-7" aria-hidden="true" />
+                                    <Scale className="h-7 w-7" aria-hidden="true" />
                                     <span>Strategy</span>
                                 </div>
                             </Link>
@@ -53,7 +53,7 @@ export default function TabMenu() {
                         <li>
                             <Link to="/more" className="ui-selected:text-white ui-not-selected:text-gray-400 focus:outline-none">
                                 <div className="flex flex-col items-center gap-1">
-                                    <EllipsisHorizontalCircleIcon className="h-7 w-7" aria-hidden="true" />
+                                    <MoreHorizontal className="h-7 w-7" aria-hidden="true" />
                                     <span>More</span>
                                 </div>
                             </Link>

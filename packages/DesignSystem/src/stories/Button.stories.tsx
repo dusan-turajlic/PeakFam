@@ -19,7 +19,7 @@ const meta = {
         },
         size: {
             control: 'select',
-            options: ['xl', 'lg', 'default', 'sm', 'icon', 'icon-sm', 'icon-lg'],
+            options: ['xl', 'lg', 'default', 'sm', 'xs', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'],
             description: 'Size variant',
         },
         disabled: {
@@ -66,6 +66,10 @@ export const Sizes: Story = {
             <div className="space-y-2">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Small</p>
                 <Button size="sm">Small Button</Button>
+            </div>
+            <div className="space-y-2">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Extra Small</p>
+                <Button size="xs">Extra Small</Button>
             </div>
         </div>
     ),
@@ -118,6 +122,9 @@ export const IconButtons: Story = {
                     </Button>
                     <Button variant="icon" size="icon-sm" aria-label="Add item">
                         <Plus className="h-4 w-4" />
+                    </Button>
+                    <Button variant="icon" size="icon-xs" aria-label="Add item">
+                        <Plus className="h-3 w-3" />
                     </Button>
                 </div>
             </div>
@@ -236,6 +243,13 @@ export const Small: Story = {
     args: {
         children: 'Small',
         size: 'sm',
+    },
+};
+
+export const ExtraSmall: Story = {
+    args: {
+        children: 'Extra Small',
+        size: 'xs',
     },
 };
 

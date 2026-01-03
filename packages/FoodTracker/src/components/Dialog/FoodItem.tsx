@@ -3,7 +3,7 @@ import type { Product } from "@/modals"
 import { searchByBarcode } from "@/services/api/openFoodDex"
 import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
-import { ChevronLeftIcon, HeartIcon, Square2StackIcon } from "@heroicons/react/24/outline"
+import { ChevronLeft, Heart, Copy } from "@peakfam/design-system/icons"
 
 // UI Components
 import { CircularProgress, ProgressBar, MacroBadge, InfoCard, InlineSpinner } from "@/components/ui"
@@ -74,7 +74,7 @@ export default function FoodItem() {
                     onClick={handleBack}
                     className="p-1 -ml-1 rounded-lg hover:bg-white/10 transition-colors"
                 >
-                    <ChevronLeftIcon className="w-6 h-6" />
+                    <ChevronLeft className="w-6 h-6" />
                 </button>
                 <h1 className="flex-1 text-center font-semibold text-lg pr-7 truncate">
                     {displayName}
@@ -93,11 +93,11 @@ export default function FoodItem() {
                 {/* Action Buttons */}
                 <div className="flex gap-4 justify-start">
                     <button className="flex flex-col items-center gap-1 px-6 py-3 bg-surface-card hover:bg-surface-elevated rounded-xl transition-colors">
-                        <Square2StackIcon className="w-6 h-6" />
+                        <Copy className="w-6 h-6" />
                         <span className="text-sm">To Custom</span>
                     </button>
                     <button className="flex flex-col items-center gap-1 px-6 py-3 bg-surface-card hover:bg-surface-elevated rounded-xl transition-colors">
-                        <HeartIcon className="w-6 h-6" />
+                        <Heart className="w-6 h-6" />
                         <span className="text-sm">Favorite</span>
                     </button>
                 </div>

@@ -7,15 +7,12 @@ export const DB_VERSION = 1;
 
 const provider = createProvider("sqlite", DB_NAME, DB_VERSION); // create once
 
-export async function* searchGenerator(freeText: string): AsyncGenerator<IOpenFoodDexObject> {
-    for await (const item of provider.search<IOpenFoodDexObject>('/products', {
+export async function search(freeText: string): Promise<IOpenFoodDexObject[]> {
+    return provider.search<IOpenFoodDexObject>('/products', {
         name: {
             fuzzy: freeText
         }
-    })) {
-        yield item;
-    }
-
+    });
 }
 
 export async function searchByBarcode(barcode: string): Promise<Product | null> {

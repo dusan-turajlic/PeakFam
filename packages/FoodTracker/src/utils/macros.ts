@@ -6,6 +6,13 @@ interface MacroInput {
     carbs?: number;
 }
 
+// One gram of protein has 4 calories
+const PROTEIN_CALORIES_PER_GRAM = 4;
+// One gram of fat has 9 calories
+const FAT_CALORIES_PER_GRAM = 9;
+// One gram of carbs has 4 calories
+const CARBS_CALORIES_PER_GRAM = 4;
+
 /**
  * Calculate calories based on macronutrients using the 4-9-4 rule:
  * - Protein: 4 calories per gram
@@ -14,12 +21,8 @@ interface MacroInput {
  */
 export function calculateCaloriesFromMacros(macros: MacroInput): number {
     const { protein = 0, fat = 0, carbs = 0 } = macros;
-    
-    if (protein === undefined && fat === undefined && carbs === undefined) {
-        return 0;
-    }
-    
-    return (protein ?? 0) * 4 + (fat ?? 0) * 9 + (carbs ?? 0) * 4;
+
+    return protein * PROTEIN_CALORIES_PER_GRAM + fat * FAT_CALORIES_PER_GRAM + carbs * CARBS_CALORIES_PER_GRAM;
 }
 
 /**

@@ -181,7 +181,7 @@ export default class SQLiteProvider extends BaseProvider {
         return JSON.parse(asString(results[0].data)) as T;
     }
 
-    async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
+    async search<T>(path: string, query: IBaseSearchQuary): Promise<T[]> {
         const sqlite = await this.getSQLite();
         const pathPrefix = `${path}/`;
 
@@ -193,6 +193,7 @@ export default class SQLiteProvider extends BaseProvider {
 
         const [key] = Object.keys(query);
         const queryValue = query[key];
+        const matches: T[] = [];
 
         for (const row of results) {
             const rowPath = asString(row.path);
@@ -204,15 +205,17 @@ export default class SQLiteProvider extends BaseProvider {
 
             if (queryValue.fuzzy) {
                 if (data[key]?.includes(queryValue.fuzzy)) {
-                    yield data as T;
+                    matches.push(data as T);
                 }
             }
             if (queryValue.exact) {
                 if (data[key] === queryValue.exact) {
-                    yield data as T;
+                    matches.push(data as T);
                 }
             }
         }
+
+        return matches;
     }
 
     async create<T>(path: string, data: T, generateId: boolean = true): Promise<T & { id: string }> {

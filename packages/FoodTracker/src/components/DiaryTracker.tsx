@@ -2,7 +2,7 @@ import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
 import { Button } from "@headlessui/react";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { Plus } from "@peakfam/design-system/icons";
 import { useAtom } from "jotai";
 
 function generateTimeStamps() {
@@ -46,7 +46,7 @@ function DiaryTracker() {
                                             {label}
                                         </span>
                                         <Button onClick={() => { setState({ ...state, open: true, state: LoggerDialogState.LAUNCHER, metadata: { id: uuid } }) }} className="flex items-center justify-center self-center text-center rounded-full bg-surface-elevated hover:bg-brand-gold hover:text-surface-base transition-colors w-5 h-5 font-medium text-white">
-                                            <PlusIcon aria-hidden="true" className="size-3" />
+                                            <Plus aria-hidden="true" className="size-3" />
                                         </Button>
                                     </div>
                                     <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">

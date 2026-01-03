@@ -1,6 +1,6 @@
 import { Button, Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import { useAtom } from "jotai"
-import { XMarkIcon } from "@heroicons/react/24/outline"
+import { X } from "@peakfam/design-system/icons"
 import { loggerDialog } from "@/atoms/loggerDialog"
 import { Fragment, useState } from "react"
 import LauncherTabs from "./LauncherTabs"
@@ -18,7 +18,7 @@ export default function LoggerLauncher() {
             <Button
                 onClick={() => setState({ ...state, open: false })}
                 className="relative flex bg-surface-elevated hover:bg-brand-gold rounded-full p-2 mx-2 mb-4 transition-colors">
-                <XMarkIcon className="size-5 text-white" />
+                <X className="size-5 text-white" />
             </Button>
             <TabGroup selectedIndex={selectedIndex}>
                 <TabList className="flex w-auto space-x-2 text-white border-b border-surface-elevated flex nowrap overflow-x-auto px-2 relative">

@@ -9,9 +9,10 @@ interface Tab {
 interface TabGroupProps {
   tabs: Tab[]
   defaultTab?: number
+  onTabChange?: (index: number) => void
 }
 
-export function TabGroup({ tabs, defaultTab = 0 }: Readonly<TabGroupProps>) {
+export function TabGroup({ tabs, defaultTab = 0, onTabChange }: Readonly<TabGroupProps>) {
   const [activeTab, setActiveTab] = React.useState(defaultTab)
   const [prevTab, setPrevTab] = React.useState(defaultTab)
   const [indicatorStyle, setIndicatorStyle] = React.useState({ left: 0, width: 0 })
@@ -32,6 +33,7 @@ export function TabGroup({ tabs, defaultTab = 0 }: Readonly<TabGroupProps>) {
   const handleTabChange = (index: number) => {
     setPrevTab(activeTab)
     setActiveTab(index)
+    onTabChange?.(index)
   }
 
   const setTabRef = (index: number) => (el: HTMLDivElement | null) => {
@@ -80,7 +82,7 @@ export function TabGroup({ tabs, defaultTab = 0 }: Readonly<TabGroupProps>) {
           }}
         />
       </div>
-      <div className="rounded-xl bg-surface p-8 border border-border" role="tabpanel">
+      <div className="rounded-xl bg-surface border border-border" role="tabpanel">
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, x: direction * 20 }}
