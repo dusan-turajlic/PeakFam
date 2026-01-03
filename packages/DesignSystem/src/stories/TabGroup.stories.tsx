@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Scan, Search, Plus, Settings, User, Bell, Home, Star, Heart } from 'lucide-react';
 
@@ -28,15 +29,15 @@ export const Default: Story = {
         tabs: [
             {
                 tab: <TabButton icon={<Scan className="h-4 w-4" />}>Scan</TabButton>,
-                content: <p className="text-foreground">Scan mode: Use your camera to quickly scan food barcodes.</p>,
+                content: <p className="text-foreground p-8">Scan mode: Use your camera to quickly scan food barcodes.</p>,
             },
             {
                 tab: <TabButton icon={<Search className="h-4 w-4" />}>Search</TabButton>,
-                content: <p className="text-foreground">Search mode: Find foods by typing their name.</p>,
+                content: <p className="text-foreground p-8">Search mode: Find foods by typing their name.</p>,
             },
             {
                 tab: <TabButton icon={<Plus className="h-4 w-4" />}>History</TabButton>,
-                content: <p className="text-foreground">History: View your recently scanned or searched foods.</p>,
+                content: <p className="text-foreground p-8">History: View your recently scanned or searched foods.</p>,
             },
         ],
         defaultTab: 0,
@@ -57,15 +58,15 @@ export const WithIcons: Story = {
                 tabs={[
                     {
                         tab: <TabButton icon={<Scan className="h-4 w-4" />}>Scan</TabButton>,
-                        content: <p className="text-foreground">Scan mode: Use your camera to quickly scan food barcodes.</p>,
+                        content: <p className="text-foreground p-8">Scan mode: Use your camera to quickly scan food barcodes.</p>,
                     },
                     {
                         tab: <TabButton icon={<Search className="h-4 w-4" />}>Search</TabButton>,
-                        content: <p className="text-foreground">Search mode: Find foods by typing their name.</p>,
+                        content: <p className="text-foreground p-8">Search mode: Find foods by typing their name.</p>,
                     },
                     {
                         tab: <TabButton icon={<Plus className="h-4 w-4" />}>History</TabButton>,
-                        content: <p className="text-foreground">History: View your recently scanned or searched foods.</p>,
+                        content: <p className="text-foreground p-8">History: View your recently scanned or searched foods.</p>,
                     },
                 ]}
             />
@@ -87,15 +88,15 @@ export const TextOnly: Story = {
                 tabs={[
                     {
                         tab: <TabButton>Overview</TabButton>,
-                        content: <p className="text-foreground">Overview content: Get a quick summary of your daily progress.</p>,
+                        content: <p className="text-foreground p-8">Overview content: Get a quick summary of your daily progress.</p>,
                     },
                     {
                         tab: <TabButton>Details</TabButton>,
-                        content: <p className="text-foreground">Details content: Dive deeper into your nutrition breakdown.</p>,
+                        content: <p className="text-foreground p-8">Details content: Dive deeper into your nutrition breakdown.</p>,
                     },
                     {
                         tab: <TabButton>Analytics</TabButton>,
-                        content: <p className="text-foreground">Analytics content: View trends and patterns over time.</p>,
+                        content: <p className="text-foreground p-8">Analytics content: View trends and patterns over time.</p>,
                     },
                 ]}
             />
@@ -114,11 +115,11 @@ export const TwoTabs: Story = {
                 tabs={[
                     {
                         tab: <TabButton icon={<User className="h-4 w-4" />}>Login</TabButton>,
-                        content: <p className="text-foreground">Login form would go here.</p>,
+                        content: <p className="text-foreground p-8">Login form would go here.</p>,
                     },
                     {
                         tab: <TabButton icon={<Plus className="h-4 w-4" />}>Register</TabButton>,
-                        content: <p className="text-foreground">Registration form would go here.</p>,
+                        content: <p className="text-foreground p-8">Registration form would go here.</p>,
                     },
                 ]}
             />
@@ -137,23 +138,23 @@ export const ManyTabs: Story = {
                 tabs={[
                     {
                         tab: <TabButton icon={<Home className="h-4 w-4" />}>Home</TabButton>,
-                        content: <p className="text-foreground">Home content.</p>,
+                        content: <p className="text-foreground p-8">Home content.</p>,
                     },
                     {
                         tab: <TabButton icon={<Star className="h-4 w-4" />}>Favorites</TabButton>,
-                        content: <p className="text-foreground">Favorites content.</p>,
+                        content: <p className="text-foreground p-8">Favorites content.</p>,
                     },
                     {
                         tab: <TabButton icon={<Heart className="h-4 w-4" />}>Liked</TabButton>,
-                        content: <p className="text-foreground">Liked content.</p>,
+                        content: <p className="text-foreground p-8">Liked content.</p>,
                     },
                     {
                         tab: <TabButton icon={<Bell className="h-4 w-4" />}>Notifications</TabButton>,
-                        content: <p className="text-foreground">Notifications content.</p>,
+                        content: <p className="text-foreground p-8">Notifications content.</p>,
                     },
                     {
                         tab: <TabButton icon={<Settings className="h-4 w-4" />}>Settings</TabButton>,
-                        content: <p className="text-foreground">Settings content.</p>,
+                        content: <p className="text-foreground p-8">Settings content.</p>,
                     },
                 ]}
             />
@@ -167,15 +168,15 @@ export const DefaultSecondTab: Story = {
         tabs: [
             {
                 tab: <TabButton>First</TabButton>,
-                content: <p className="text-foreground">First tab content.</p>,
+                content: <p className="text-foreground p-8">First tab content.</p>,
             },
             {
                 tab: <TabButton>Second</TabButton>,
-                content: <p className="text-foreground">Second tab content - this is the default.</p>,
+                content: <p className="text-foreground p-8">Second tab content - this is the default.</p>,
             },
             {
                 tab: <TabButton>Third</TabButton>,
-                content: <p className="text-foreground">Third tab content.</p>,
+                content: <p className="text-foreground p-8">Third tab content.</p>,
             },
         ],
         defaultTab: 1,
@@ -225,4 +226,60 @@ export const RichContent: Story = {
             />
         </div>
     ),
+};
+
+// With onTabChange Callback
+const tabNames = ['Home', 'Search', 'Settings'];
+
+function OnTabChangeDemo() {
+    const [history, setHistory] = useState<string[]>([]);
+
+    const handleTabChange = (index: number) => {
+        const timestamp = new Date().toLocaleTimeString();
+        setHistory(prev => [`[${timestamp}] Switched to "${tabNames[index]}" (index: ${index})`, ...prev].slice(0, 5));
+    };
+
+    return (
+        <div className="space-y-8 w-[500px]">
+            <div className="space-y-2">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">With onTabChange Callback</p>
+                <p className="text-sm text-foreground-secondary">
+                    The onTabChange callback fires whenever the active tab changes, useful for analytics or syncing state.
+                </p>
+            </div>
+            <TabGroup
+                tabs={[
+                    {
+                        tab: <TabButton icon={<Home className="h-4 w-4" />}>Home</TabButton>,
+                        content: <p className="text-foreground p-8">Welcome to the home tab.</p>,
+                    },
+                    {
+                        tab: <TabButton icon={<Search className="h-4 w-4" />}>Search</TabButton>,
+                        content: <p className="text-foreground p-8">Search for anything here.</p>,
+                    },
+                    {
+                        tab: <TabButton icon={<Settings className="h-4 w-4" />}>Settings</TabButton>,
+                        content: <p className="text-foreground p-8">Adjust your preferences.</p>,
+                    },
+                ]}
+                onTabChange={handleTabChange}
+            />
+            <div className="p-4 bg-muted rounded-lg space-y-2">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Callback History</p>
+                {history.length === 0 ? (
+                    <p className="text-sm text-foreground-secondary italic">Click a tab to see the callback in action...</p>
+                ) : (
+                    <ul className="space-y-1">
+                        {history.map((entry, i) => (
+                            <li key={i} className="text-sm text-foreground font-mono">{entry}</li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export const WithOnTabChange: Story = {
+    render: () => <OnTabChangeDemo />,
 };

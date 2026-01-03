@@ -1,6 +1,6 @@
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { Plus } from "@peakfam/design-system/icons";
 import { Button } from "@peakfam/design-system";
 
 function generateTimeStamps() {
@@ -20,7 +20,7 @@ function DiaryTrackerV2() {
     const today = dateTimeStartOfDay();
     return (
         <div className="flow-root">
-            <ul role="list" className="my-4 mx-2">
+            <ul className="my-4 mx-2">
                 {times.map((time, idx) => {
                     const label = time.toLocaleTimeString(USER_LOCAL_LANGUAGE, {
                         hour: '2-digit',
@@ -34,16 +34,16 @@ function DiaryTrackerV2() {
                                 {idx !== times.length - 1 ? (
                                     <span
                                         aria-hidden="true"
-                                        className="absolute top-1 left-6 h-full w-px bg-surface-elevated"
+                                        className="absolute top-1 left-6 h-full w-px bg-surface-card"
                                     />
                                 ) : null}
                                 <div className="relative flex space-x-1">
                                     <div className="flex space-x-1">
-                                        <span className="items-center justify-center min-w-13 text-center rounded-full bg-surface-card px-2 py-1 mr-2 text-xs font-medium text-white">
+                                        <Button variant="secondary" size="xs">
                                             {label}
-                                        </span>
-                                        <Button variant="outline" className="flex items-center justify-center self-center text-center rounded-full bg-surface-elevated hover:bg-brand-gold hover:text-surface-base transition-colors w-5 h-5 font-medium text-white">
-                                            <PlusIcon aria-hidden="true" className="size-3" />
+                                        </Button>
+                                        <Button variant="icon" size="icon-xs">
+                                            <Plus aria-hidden="true" className="size-3" />
                                         </Button>
                                     </div>
                                     <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">

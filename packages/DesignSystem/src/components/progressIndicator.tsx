@@ -7,6 +7,7 @@ interface ProgressIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number // Current value (e.g., 1918)
   max: number // Maximum value (e.g., 2400)
   size?: ProgressSize
+  color?: string // Custom background color class (e.g., "bg-red-500"), defaults to "bg-gold"
 }
 
 const sizeStyles = {
@@ -20,6 +21,7 @@ export function ProgressIndicator({
   value,
   max,
   size = "lg",
+  color = "bg-gold",
   className,
   ...props
 }: Readonly<ProgressIndicatorProps>) {
@@ -41,7 +43,7 @@ export function ProgressIndicator({
         {...props}
       >
         <div
-          className="absolute inset-y-0 left-0 bg-gold transition-all duration-300 ease-out rounded-full"
+          className={cn("absolute inset-y-0 left-0 transition-all duration-300 ease-out rounded-full", color)}
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -61,7 +63,7 @@ export function ProgressIndicator({
         {...props}
       >
         <div
-          className="absolute inset-y-0 left-0 bg-gold transition-all duration-300 ease-out rounded-full"
+          className={cn("absolute inset-y-0 left-0 transition-all duration-300 ease-out rounded-full", color)}
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -80,7 +82,7 @@ export function ProgressIndicator({
       {...props}
     >
       <div
-        className="absolute inset-y-0 left-0 bg-gold transition-all duration-300 ease-out rounded-full"
+        className={cn("absolute inset-y-0 left-0 transition-all duration-300 ease-out rounded-full", color)}
         style={{ width: `${percentage}%` }}
       />
 

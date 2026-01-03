@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Menu } from '@peakfam/design-system/icons'
 import { ModalSheet, ModalSheetContent } from '@peakfam/design-system'
 
 const navigation = [
@@ -18,16 +18,16 @@ export default function TopNavigation() {
     }
 
     return (
-        <div className="mx-auto max-w-7xl px-2">
-            <div className="relative flex h-16 items-center justify-between">
-                <div className="absolute inset-y-0 left-0 flex items-center">
+        <div className="sticky top-0 z-10 left-0 right-0 p-3 px-4 bg-surface-card">
+            <div className="relative flex items-center justify-between">
+                <div className="inset-y-0 left-0 flex items-center">
                     <button
                         onClick={() => setShowMenu(true)}
-                        className="group relative inline-flex items-center justify-center rounded-md p-2 text-white/60 hover:bg-surface-elevated hover:text-brand-gold"
+                        className="group relative inline-flex items-center justify-center rounded-md"
                     >
                         <span className="absolute -inset-0.5" />
                         <span className="sr-only">Open main menu</span>
-                        <Bars3Icon aria-hidden="true" className="block size-6" />
+                        <Menu aria-hidden="true" className="block size-6" />
                     </button>
                 </div>
             </div>

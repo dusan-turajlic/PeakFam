@@ -31,7 +31,7 @@ export default abstract class BaseProvider {
     abstract get<T>(path: string): Promise<T>;
     abstract create<T>(path: string, data: T, generateId?: boolean): Promise<T & { id: string }>;
     abstract createMany<T>(dataArray: { path: string, data: T }[], generateId?: boolean): Promise<void>;
-    abstract search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T>;
+    abstract search<T>(path: string, query: IBaseSearchQuary): Promise<T[]>;
     abstract update<T>(path: string, data: Partial<T>): Promise<T>;
     abstract delete(path: string): Promise<void>;
 }

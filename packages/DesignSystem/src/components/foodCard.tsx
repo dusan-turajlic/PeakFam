@@ -42,7 +42,7 @@ export function FoodCard({
         <div className="space-y-1">
           <h3 className="font-semibold text-foreground leading-tight">{title}</h3>
           <p className="text-sm text-foreground-secondary">
-            {calories} ⚡ {protein}P {fat}F {carbs}C • {serving}
+            {calories} 🔥 {protein}P {fat}F {carbs}C • {serving}
           </p>
         </div>
       </div>

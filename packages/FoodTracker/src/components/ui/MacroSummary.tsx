@@ -1,4 +1,4 @@
-import { FireIcon } from '@heroicons/react/20/solid';
+import { Flame } from '@peakfam/design-system/icons';
 import { formatMacroValue } from '@/utils/format';
 
 interface MacroSummaryProps {
@@ -39,7 +39,7 @@ export function MacroSummary({
             {hasCalories && (
                 <dt className="flex flex-row items-center gap-x-1">
                     <span className={textClass}>{Math.round(calories)}</span>
-                    <FireIcon aria-hidden="true" className={iconClass} />
+                    <Flame aria-hidden="true" className={iconClass} />
                 </dt>
             )}
             

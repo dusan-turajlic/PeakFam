@@ -1,6 +1,6 @@
 import { Input } from "@headlessui/react";
 import { useRef, useState } from "react";
-import { searchGenerator } from "@/services/api/openFoodDex";
+import { search } from "@/services/api/openFoodDex";
 import FoodItem from "@/components/FoodItem";
 import { getIconBasedOnCategories } from "@/services/api/openFoodDex/iconBasedOnCategorie";
 import type { IOpenFoodDexObject } from "@/modals";
@@ -15,7 +15,8 @@ async function triggerSearch(
     setIsSearching: (isSearching: boolean) => void
 ): Promise<void> {
     const results = new Map<string, IOpenFoodDexObject>();
-    for await (const result of searchGenerator(searchQuery)) {
+    const searchResults = await search(searchQuery);
+    for (const result of searchResults) {
         results.set(result.code, result);
     }
 

@@ -29,9 +29,11 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(dirname, 'src/index.ts'),
+      entry: {
+        index: path.resolve(dirname, 'src/index.ts'),
+        'icons/index': path.resolve(dirname, 'src/icons/index.ts'),
+      },
       formats: ['es'],
-      fileName: 'index',
     },
     rollupOptions: {
       external: [
@@ -39,7 +41,6 @@ export default defineConfig({
         'react-dom',
         'react/jsx-runtime',
         'framer-motion',
-        'lucide-react',
         'class-variance-authority',
         'clsx',
         'tailwind-merge',

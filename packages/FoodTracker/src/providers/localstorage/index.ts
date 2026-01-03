@@ -35,7 +35,7 @@ export default class LocalStorageProvider extends BaseProvider {
         return JSON.parse(item);
     }
 
-    async *search<T>(path: string, query: IBaseSearchQuary): AsyncGenerator<T> {
+    async search<T>(path: string, query: IBaseSearchQuary): Promise<T[]> {
         const root = this._getRoot();
         const keys = handlePath(path);
 
@@ -43,33 +43,36 @@ export default class LocalStorageProvider extends BaseProvider {
         let current = root;
         for (const key of keys) {
             if (!current?.[key]) {
-                return; // No data at path, nothing to yield
+                return []; // No data at path
             }
             current = current[key];
         }
 
         if (!current || typeof current !== 'object') {
-            return;
+            return [];
         }
 
         const [queryKey] = Object.keys(query);
         const queryValue = query[queryKey];
+        const matches: T[] = [];
 
-        // Iterate through all items and yield matches
+        // Iterate through all items and collect matches
         for (const item of Object.values(current)) {
             const data = item as Record<string, string>;
 
             if (queryValue.fuzzy) {
                 if (data[queryKey]?.includes(queryValue.fuzzy)) {
-                    yield data as T;
+                    matches.push(data as T);
                 }
             }
             if (queryValue.exact) {
                 if (data[queryKey] === queryValue.exact) {
-                    yield data as T;
+                    matches.push(data as T);
                 }
             }
         }
+
+        return matches;
     }
 
 

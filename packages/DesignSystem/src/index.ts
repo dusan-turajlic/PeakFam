@@ -17,3 +17,5 @@ export type { ButtonProps } from './ui/button';
 // Utilities
 export { cn } from './lib/utils';
 
+// Icons - re-export for convenience (full set available via '@peakfam/design-system/icons')
+export * as Icons from './icons';

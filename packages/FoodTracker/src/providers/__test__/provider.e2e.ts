@@ -232,33 +232,23 @@ describe.each(testableProviders)('createProvider($0)', (providerType) => {
       });
 
       it(`(${providerType}) should find items with fuzzy search`, async () => {
-        const results: Array<{ name: string }> = [];
-        for await (const item of provider.search<{ name: string }>('/search', { name: { fuzzy: 'Apple' } })) {
-          results.push(item);
-        }
+        const searchResults = await provider.search<{ name: string }>('/search', { name: { fuzzy: 'Apple' } });
 
-        expect(results).toHaveLength(2);
-        expect(results.map(r => r.name)).toContain('Apple Pie');
-        expect(results.map(r => r.name)).toContain('Apple Juice');
+        expect(searchResults).toHaveLength(2);
+        expect(searchResults.map(r => r.name)).toContain('Apple Pie');
+        expect(searchResults.map(r => r.name)).toContain('Apple Juice');
       });
 
       it(`(${providerType}) should find items with exact search`, async () => {
-        const results: Array<{ category: string }> = [];
-        for await (const item of provider.search<{ category: string }>('/search', { category: { exact: 'dessert' } })) {
-          results.push(item);
-        }
+        const searchResults = await provider.search<{ category: string }>('/search', { category: { exact: 'dessert' } });
 
-        expect(results).toHaveLength(2);
-        expect(results.every(r => r.category === 'dessert')).toBe(true);
+        expect(searchResults).toHaveLength(2);
+        expect(searchResults.every(r => r.category === 'dessert')).toBe(true);
       });
 
       it(`(${providerType}) should return empty when no matches found`, async () => {
-        const results: Array<{ name: string }> = [];
-        for await (const item of provider.search<{ name: string }>('/search', { name: { fuzzy: 'Orange' } })) {
-          results.push(item);
-        }
-
-        expect(results).toHaveLength(0);
+        const searchResults = await provider.search<{ name: string }>('/search', { name: { fuzzy: 'Orange' } });
+        expect(searchResults).toHaveLength(0);
       });
     });
   });
