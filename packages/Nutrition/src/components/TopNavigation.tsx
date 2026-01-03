@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Menu } from '@peakfam/design-system/icons'
-import { ModalSheet, ModalSheetContent } from '@peakfam/design-system'
+import { Menu } from '@ydin/design-system/icons'
+import { ModalSheet, ModalSheetContent } from '@ydin/design-system'
 
 const navigation = [
     { name: 'Copy day', href: '#' },

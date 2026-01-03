@@ -1,5 +1,5 @@
 {
-  "name": "@peakfam/food-tracker",
+  "name": "@ydin/nutrition",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
-    "@peakfam/design-system": "workspace:*",
+    "@ydin/design-system": "workspace:*",
     "@subframe7536/sqlite-wasm": "^0.5.8",
     "@tailwindcss/vite": "^4.1.12",
     "@types/node": "^24.3.0",

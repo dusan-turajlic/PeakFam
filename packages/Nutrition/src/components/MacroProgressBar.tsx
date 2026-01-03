@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProgressIndicator } from "@peakfam/design-system";
+import { ProgressIndicator } from "@ydin/design-system";
 
 interface MacroData {
     value: number;

@@ -1,73 +1,131 @@
-# React + TypeScript + Vite
+# Ydin Design System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A shared component library for the Ydin suite of applications. Built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+> Part of the [Ydin](../../README.md) suite of health and wellness apps.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Components
 
-## React Compiler
+| Component | Description |
+|-----------|-------------|
+| `DayButton` | Day selector button for date navigation |
+| `FoodCard` | Card component for displaying food items |
+| `IconButton` | Button with icon support |
+| `ModalSheet` | Bottom sheet modal component |
+| `ProgressIndicator` | Progress bar/indicator |
+| `RippleEffect` | Material-style ripple effect |
+| `SearchInput` | Search input field with styling |
+| `TabButton` | Individual tab button |
+| `TabGroup` | Tab navigation group |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Usage
 
-## Expanding the ESLint configuration
+Install the design system in your package:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```json
+{
+  "dependencies": {
+    "@ydin/design-system": "workspace:*"
+  }
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Import components:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+import { DayButton, ModalSheet, TabGroup } from '@ydin/design-system';
+import '@ydin/design-system/styles';
 ```
+
+## Development
+
+### Commands
+
+Run from this directory (`packages/DesignSystem`):
+
+```bash
+# Start Storybook
+pnpm storybook
+
+# Build the library
+pnpm build
+
+# Run tests
+pnpm test
+
+# Lint code
+pnpm lint
+```
+
+Or from the root directory:
+
+```bash
+pnpm storybook    # Starts Storybook
+pnpm build        # Builds all packages including this one
+```
+
+### Storybook
+
+This package uses Storybook for component development and documentation. Stories are located in `src/stories/`.
+
+```bash
+pnpm storybook
+```
+
+Visit `http://localhost:6006` to view the component library.
+
+## Adding New Components
+
+1. Create your component in `src/components/`:
+
+```tsx
+// src/components/myComponent.tsx
+export function MyComponent({ children }: { children: React.ReactNode }) {
+  return <div className="...">{children}</div>;
+}
+```
+
+2. Export it from `src/index.ts`:
+
+```tsx
+export { MyComponent } from './components/myComponent';
+```
+
+3. Add a story in `src/stories/`:
+
+```tsx
+// src/stories/MyComponent.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { MyComponent } from '../components/myComponent';
+
+const meta: Meta<typeof MyComponent> = {
+  component: MyComponent,
+};
+
+export default meta;
+
+export const Default: StoryObj<typeof MyComponent> = {
+  args: {
+    children: 'Hello World',
+  },
+};
+```
+
+4. Build to update the dist:
+
+```bash
+pnpm build
+```
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| **Framework** | React 19 + TypeScript |
+| **Styling** | Tailwind CSS |
+| **Documentation** | Storybook |
+| **Build** | Vite + vite-plugin-dts |
+
+## Contributing
+
+See the main [CONTRIBUTING.md](../../CONTRIBUTING.md) for coding guidelines and best practices.

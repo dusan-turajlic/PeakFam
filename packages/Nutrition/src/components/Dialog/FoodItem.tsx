@@ -3,7 +3,7 @@ import type { Product } from "@/modals"
 import { searchByBarcode } from "@/services/api/openFoodDex"
 import { useAtom } from "jotai"
 import { useEffect, useState } from "react"
-import { ChevronLeft, Heart, Copy } from "@peakfam/design-system/icons"
+import { ChevronLeft, Heart, Copy } from "@ydin/design-system/icons"
 
 // UI Components
 import { CircularProgress, ProgressBar, MacroBadge, InfoCard, InlineSpinner } from "@/components/ui"

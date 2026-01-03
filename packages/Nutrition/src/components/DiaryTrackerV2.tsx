@@ -1,7 +1,7 @@
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
-import { Plus } from "@peakfam/design-system/icons";
-import { Button } from "@peakfam/design-system";
+import { Plus } from "@ydin/design-system/icons";
+import { Button } from "@ydin/design-system";
 
 function generateTimeStamps() {
     const today = dateTimeStartOfDay();

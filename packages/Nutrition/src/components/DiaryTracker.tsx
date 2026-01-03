@@ -2,7 +2,7 @@ import { loggerDialog, LoggerDialogState } from "@/atoms/loggerDialog";
 import { dateTimeStartOfDay, USER_LOCAL_LANGUAGE } from "@/utils/browser";
 import { createDateTimeUUID } from "@/utils/uuid";
 import { Button } from "@headlessui/react";
-import { Plus } from "@peakfam/design-system/icons";
+import { Plus } from "@ydin/design-system/icons";
 import { useAtom } from "jotai";
 
 function generateTimeStamps() {
