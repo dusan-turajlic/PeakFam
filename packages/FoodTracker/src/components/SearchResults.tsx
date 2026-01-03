@@ -5,6 +5,7 @@ import type { IOpenFoodDexObject } from "@/modals";
 import { formatProductName } from "@/utils/format";
 import { calculateCaloriesFromMacros } from "@/utils/macros";
 import { LoadingSpinner } from "@/components/ui";
+import { Search, SearchX } from "@peakfam/design-system/icons";
 
 interface SearchResultsProps {
     query: string;
@@ -66,7 +67,7 @@ export default function SearchResults({ query }: Readonly<SearchResultsProps>) {
     if (!query.trim()) {
         return (
             <div className="flex flex-col items-center justify-center h-full text-foreground-secondary py-12">
-                <span className="text-4xl mb-2">🔍</span>
+                <span className="text-4xl mb-2"><Search className="h-8 w-8" /></span>
                 <p>Start typing to search for foods</p>
             </div>
         );
@@ -85,7 +86,7 @@ export default function SearchResults({ query }: Readonly<SearchResultsProps>) {
     if (!isSearching && results.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-full text-foreground-secondary py-12">
-                <span className="text-4xl mb-2">🤷</span>
+                <span className="text-4xl mb-2"><SearchX className="h-8 w-8" /></span>
                 <p>No results found for "{query}"</p>
             </div>
         );
